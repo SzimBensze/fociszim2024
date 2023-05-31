@@ -1,4 +1,4 @@
-package org.szimbensze;
+package org.szimbensze.fociszim;
 
 public class Main {
     public static void main(String[] args) {
