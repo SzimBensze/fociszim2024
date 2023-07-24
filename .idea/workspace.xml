@@ -5,15 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d9a9f3e-fd75-4817-96f9-746c7d6fe76d" name="Changes" comment="Init starter project">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/szimbensze/fociszim/logic/Chance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/szimbensze/fociszim/logic/EventRandomizer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/szimbensze/fociszim/logic/Match.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/szimbensze/fociszim/logic/Match120.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/szimbensze/fociszim/logic/Match90.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/szimbensze/fociszim/logic/TeamCreator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/szimbensze/fociszim/model/EventType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/szimbensze/fociszim/model/FootballEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/szimbensze/fociszim/model/Formation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/szimbensze/fociszim/model/Home.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/szimbensze/fociszim/model/Team.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/szimbensze/fociszim/model/Visitor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/szimbensze/fociszim/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/szimbensze/fociszim/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -43,7 +68,10 @@
       <workItem from="1685442580502" duration="81000" />
       <workItem from="1685444773017" duration="447000" />
       <workItem from="1685445783576" duration="171000" />
-      <workItem from="1685523242351" duration="825000" />
+      <workItem from="1685523242351" duration="1120000" />
+      <workItem from="1685618883713" duration="628000" />
+      <workItem from="1687081640061" duration="353000" />
+      <workItem from="1690185137588" duration="2731000" />
     </task>
     <task id="LOCAL-00001" summary="Init starter project">
       <created>1685444903011</created>
