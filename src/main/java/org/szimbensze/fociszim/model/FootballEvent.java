@@ -1,9 +1,11 @@
 package org.szimbensze.fociszim.model;
 
+import java.util.ArrayList;
+
 public class FootballEvent {
 
     String display;
-    Team included;
+    ArrayList<Team> includedTeams;
     EventType type;
 
 }

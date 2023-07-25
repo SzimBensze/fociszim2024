@@ -10,9 +10,11 @@ public abstract class Match {
 
     Home home;
     Visitor visitor;
-    HashMap<Integer, FootballEvent> events;
     Integer firstMinute;
     Integer lastMinute;
     Integer currentMinute;
+    ChanceCalculator chanceCalc;
+    EventRandomizer eventRandom;
+    HashMap<Integer, FootballEvent> events;
 
 }

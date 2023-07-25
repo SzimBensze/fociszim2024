@@ -9,6 +9,7 @@ public abstract class Team {
     Formation formation;
     Float baseChance;
     Float minuteChance;
+    Float minuteChanceModifier;
 
     public String getName() {
         return name;
@@ -64,5 +65,26 @@ public abstract class Team {
 
     public void setMinuteChance(Float minuteChance) {
         this.minuteChance = minuteChance;
+    }
+
+    public Float getMinuteChanceModifier() {
+        return minuteChanceModifier;
+    }
+
+    public void setMinuteChanceModifier(Float minuteChanceModifier) {
+        this.minuteChanceModifier = minuteChanceModifier;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "name='" + name + '\'' +
+                ", atk=" + atk +
+                ", mid=" + mid +
+                ", def=" + def +
+                ", formation=" + formation +
+                ", baseChance=" + baseChance +
+                ", minuteChance=" + minuteChance +
+                '}';
     }
 }
