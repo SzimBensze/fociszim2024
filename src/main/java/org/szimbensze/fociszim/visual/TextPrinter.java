@@ -13,4 +13,15 @@ public class TextPrinter {
         System.out.printf("%s: %s - %s - %s%n", team.getName(), team.getAtk(), team.getMid(), team.getDef());
     }
 
+    public void printFormation(Team team) {
+        if (team.getFormation() == null) System.out.printf("%s formation not selected!");
+        else System.out.printf("%s formation: %s%n", team.getName(), team.getFormation().inputString);
+    }
+
+    public void printDivider() {
+        System.out.println();
+        System.out.println("-----");
+        System.out.println();
+    }
+
 }

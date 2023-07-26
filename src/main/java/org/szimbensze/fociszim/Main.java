@@ -1,7 +1,6 @@
 package org.szimbensze.fociszim;
 
 import org.szimbensze.fociszim.logic.*;
-import org.szimbensze.fociszim.model.Formation;
 import org.szimbensze.fociszim.model.Home;
 import org.szimbensze.fociszim.model.Team;
 import org.szimbensze.fociszim.model.Visitor;
@@ -21,11 +20,16 @@ public class Main {
         Team visitorTeam = teamCreator.createTeam(Visitor.class);
 
         teamCreator.addStats(homeTeam);
-        teamCreator.addFormation(homeTeam, Formation.F4141);
         printer.printTeam(homeTeam);
-
         teamCreator.addStats(visitorTeam);
-        teamCreator.addFormation(visitorTeam, Formation.F4411);
         printer.printTeam(visitorTeam);
+        printer.printDivider();
+
+        teamCreator.addFormation(homeTeam);
+        printer.printFormation(homeTeam);
+        teamCreator.addFormation(visitorTeam);
+        printer.printFormation(visitorTeam);
+        printer.printDivider();
+
     }
 }

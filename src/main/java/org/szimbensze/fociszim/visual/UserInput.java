@@ -1,10 +1,12 @@
-package org.szimbensze.fociszim.logic;
+package org.szimbensze.fociszim.visual;
 
 import org.szimbensze.fociszim.model.Home;
 import org.szimbensze.fociszim.model.Team;
 import org.szimbensze.fociszim.model.Visitor;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserInput {
 
@@ -30,7 +32,7 @@ public class UserInput {
                     System.out.printf("%s defense points (1-99): ", teamName);
                     break;
                 default:
-                    System.out.printf("%s points (1-99): ");
+                    System.out.printf("%s points (1-99): ", teamName);
             }
             try {
                 points = Integer.parseInt(sc.nextLine());
@@ -41,6 +43,18 @@ public class UserInput {
             if (points < 1 || points > 99) System.out.println("Incorrect value!");
         } while (points < 1 || points > 99);
         return points;
+    }
+
+    public String inputFormation(String teamName) {
+        System.out.printf("Formation for %s:%n", teamName);
+        while (true){
+            System.out.print("Please use one of the following formats for formations:\n" +
+                    "5-4-1 OR 5-2-2-1 OR 4-2-2-1-1: ");
+            Pattern pattern = Pattern.compile("[0-9]-[0-9]-[0-9](-[0-9])?(-[0-9])?$");
+            String rawFormation = sc.nextLine();
+            Matcher matcher = pattern.matcher(rawFormation);
+            if (matcher.find()) return rawFormation;
+        }
     }
 
 }
