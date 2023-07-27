@@ -19,7 +19,6 @@ public class TextPrinter {
     }
 
     public void printDivider() {
-        System.out.println();
         System.out.println("-----");
         System.out.println();
     }

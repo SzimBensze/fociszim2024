@@ -50,7 +50,7 @@ public class UserInput {
         while (true){
             System.out.print("Please use one of the following formats for formations:\n" +
                     "5-4-1 OR 5-2-2-1 OR 4-2-2-1-1: ");
-            Pattern pattern = Pattern.compile("[0-9]-[0-9]-[0-9](-[0-9])?(-[0-9])?$");
+            Pattern pattern = Pattern.compile("^[0-9]-[0-9]-[0-9](-[0-9])?(-[0-9])?$");
             String rawFormation = sc.nextLine();
             Matcher matcher = pattern.matcher(rawFormation);
             if (matcher.find()) return rawFormation;

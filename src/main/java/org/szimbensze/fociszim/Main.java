@@ -8,25 +8,30 @@ import org.szimbensze.fociszim.visual.TextPrinter;
 
 public class Main {
     public static void main(String[] args) throws IncorrectTeamTypeException {
+        TextPrinter printer = new TextPrinter();
         System.out.println("Szim's Football Simulator 2024");
         System.out.println("The program is currently work in progress! There's not much to look at, please check back later.");
+        printer.printDivider();
 
         TeamCreator teamCreator = new TeamCreator();
         ChanceCalculator calculator = new ChanceCalculator();
         Match90 baseMatch = new Match90();
-        TextPrinter printer = new TextPrinter();
 
         Team homeTeam = teamCreator.createTeam(Home.class);
         Team visitorTeam = teamCreator.createTeam(Visitor.class);
 
         teamCreator.addStats(homeTeam);
+        printer.printDivider();
         printer.printTeam(homeTeam);
+        printer.printDivider();
         teamCreator.addStats(visitorTeam);
+        printer.printDivider();
         printer.printTeam(visitorTeam);
         printer.printDivider();
 
         teamCreator.addFormation(homeTeam);
         printer.printFormation(homeTeam);
+        printer.printDivider();
         teamCreator.addFormation(visitorTeam);
         printer.printFormation(visitorTeam);
         printer.printDivider();
