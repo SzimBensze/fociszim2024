@@ -11,14 +11,12 @@ public class TextPrinter {
         else if (team.getClass().equals(Visitor.class)) System.out.printf("Visitor team: %s%n", team.getName());
         System.out.println("Stats: ATK - MID - DEF");
         System.out.printf("%s: %s - %s - %s%n", team.getName(), team.getAtk(), team.getMid(), team.getDef());
-    }
-
-    public void printFormation(Team team) {
-        if (team.getFormation() == null) System.out.printf("%s formation not selected!");
-        else System.out.printf("%s formation: %s%n", team.getName(), team.getFormation().inputString);
+        if (team.getFormation() == null) System.out.printf("%s formation not selected!%n", team.getName());
+        else System.out.printf("%s formation: %s%n", team.getName(), team.getFormation().formationName());
     }
 
     public void printDivider() {
+        System.out.println();
         System.out.println("-----");
         System.out.println();
     }

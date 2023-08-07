@@ -1,9 +1,6 @@
 package org.szimbensze.fociszim.logic;
 
-import org.szimbensze.fociszim.model.Formation;
-import org.szimbensze.fociszim.model.Home;
-import org.szimbensze.fociszim.model.Team;
-import org.szimbensze.fociszim.model.Visitor;
+import org.szimbensze.fociszim.model.*;
 import org.szimbensze.fociszim.visual.UserInput;
 
 public class TeamCreator {
@@ -31,7 +28,7 @@ public class TeamCreator {
 
     public void addFormation(Team selectedTeam) {
         String rawFormation = userInput.inputFormation(selectedTeam.getName());
-        selectedTeam.setFormation(Formation.FX3);
+        selectedTeam.setFormation(Formations.getFormation(rawFormation));
     }
 
 }

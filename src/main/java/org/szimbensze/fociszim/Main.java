@@ -21,19 +21,15 @@ public class Main {
         Team visitorTeam = teamCreator.createTeam(Visitor.class);
 
         teamCreator.addStats(homeTeam);
+        teamCreator.addFormation(homeTeam);
         printer.printDivider();
         printer.printTeam(homeTeam);
         printer.printDivider();
+
         teamCreator.addStats(visitorTeam);
+        teamCreator.addFormation(visitorTeam);
         printer.printDivider();
         printer.printTeam(visitorTeam);
-        printer.printDivider();
-
-        teamCreator.addFormation(homeTeam);
-        printer.printFormation(homeTeam);
-        printer.printDivider();
-        teamCreator.addFormation(visitorTeam);
-        printer.printFormation(visitorTeam);
         printer.printDivider();
 
     }
