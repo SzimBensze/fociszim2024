@@ -14,18 +14,17 @@ public class Main {
         printer.printDivider();
 
         TeamCreator teamCreator = new TeamCreator();
-        ChanceCalculator calculator = new ChanceCalculator();
+        ChanceCalculator calculator = new ChanceCalculator(500F);
         Match90 baseMatch = new Match90();
 
         Team homeTeam = teamCreator.createTeam(Home.class);
-        Team visitorTeam = teamCreator.createTeam(Visitor.class);
-
         teamCreator.addStats(homeTeam);
         teamCreator.addFormation(homeTeam);
         printer.printDivider();
         printer.printTeam(homeTeam);
         printer.printDivider();
 
+        Team visitorTeam = teamCreator.createTeam(Visitor.class);
         teamCreator.addStats(visitorTeam);
         teamCreator.addFormation(visitorTeam);
         printer.printDivider();

@@ -2,8 +2,24 @@ package org.szimbensze.fociszim.logic;
 
 import org.szimbensze.fociszim.model.Team;
 
+import java.util.Random;
+
 public class ChanceCalculator {
 
-    Team selected;
+    Float baseChance;
 
+    public ChanceCalculator(Float baseChance) {
+        this.baseChance = baseChance;
+    }
+
+    public Float CalcBaseChance(Team selected, Team opponent, Float baseChance) {
+        Float chance = baseChance + (selected.getAtk() * selected.getLuck() - opponent.getDef() +
+                selected.getMid() - opponent.getMid() +
+                selected.getDef() - opponent.getAtk() * opponent.getLuck());
+        return chance;
+    }
+
+    public Float CalcMinuteChance(Team selected, Team opponent) {
+        return null;
+    }
 }

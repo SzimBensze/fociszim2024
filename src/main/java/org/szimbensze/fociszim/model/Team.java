@@ -7,9 +7,11 @@ public abstract class Team {
     Integer mid;
     Integer def;
     Formation formation;
+    Float luck;
     Float baseChance;
     Float minuteChance;
     Float minuteChanceModifier;
+    Float minuteDecreaseMultiplier;
 
     public String getName() {
         return name;
@@ -51,6 +53,14 @@ public abstract class Team {
         this.formation = formation;
     }
 
+    public Float getLuck() {
+        return luck;
+    }
+
+    public void setLuck(Float luck) {
+        this.luck = luck;
+    }
+
     public Float getBaseChance() {
         return baseChance;
     }
@@ -75,6 +85,14 @@ public abstract class Team {
         this.minuteChanceModifier = minuteChanceModifier;
     }
 
+    public Float getMinuteDecreaseMultiplier() {
+        return minuteDecreaseMultiplier;
+    }
+
+    public void setMinuteDecreaseMultiplier(Float minuteDecreaseMultiplier) {
+        this.minuteDecreaseMultiplier = minuteDecreaseMultiplier;
+    }
+
     @Override
     public String toString() {
         return "Team{" +
@@ -83,8 +101,11 @@ public abstract class Team {
                 ", mid=" + mid +
                 ", def=" + def +
                 ", formation=" + formation +
+                ", luck=" + luck +
                 ", baseChance=" + baseChance +
                 ", minuteChance=" + minuteChance +
+                ", minuteChanceModifier=" + minuteChanceModifier +
+                ", minuteDecreaseMultiplier=" + minuteDecreaseMultiplier +
                 '}';
     }
 }

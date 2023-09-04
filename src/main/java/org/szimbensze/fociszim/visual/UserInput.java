@@ -22,17 +22,10 @@ public class UserInput {
         Integer points = 0;
         do {
             switch (pointType) {
-                case "atk":
-                    System.out.printf("%s attack points (1-99): ", teamName);
-                    break;
-                case "mid":
-                    System.out.printf("%s midfield points (1-99): ", teamName);
-                    break;
-                case "def":
-                    System.out.printf("%s defense points (1-99): ", teamName);
-                    break;
-                default:
-                    System.out.printf("%s points (1-99): ", teamName);
+                case "atk" -> System.out.printf("%s attack points (1-99): ", teamName);
+                case "mid" -> System.out.printf("%s midfield points (1-99): ", teamName);
+                case "def" -> System.out.printf("%s defense points (1-99): ", teamName);
+                default -> System.out.printf("%s points (1-99): ", teamName);
             }
             try {
                 points = Integer.parseInt(sc.nextLine());
@@ -47,7 +40,7 @@ public class UserInput {
 
     public String inputFormation(String teamName) {
         System.out.printf("Formation for %s:%n", teamName);
-        while (true){
+        while (true) {
             System.out.print("Please use one of the following formats for formations:\n" +
                     "5-4-1 OR 5-2-2-1 OR 4-2-2-1-1: ");
             Pattern pattern = Pattern.compile("^[0-9]-[0-9]-[0-9](-[0-9])?(-[0-9])?$");
