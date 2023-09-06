@@ -15,7 +15,6 @@ public class Main {
 
         TeamCreator teamCreator = new TeamCreator();
         ChanceCalculator calculator = new ChanceCalculator(500F);
-        Match90 baseMatch = new Match90();
 
         Team homeTeam = teamCreator.createTeam(Home.class);
         teamCreator.addStats(homeTeam);
@@ -31,5 +30,13 @@ public class Main {
         printer.printTeam(visitorTeam);
         printer.printDivider();
 
+        teamCreator.addChances(homeTeam,
+                calculator.CalcBaseChance(homeTeam, visitorTeam),
+                calculator.CalcMinuteChance(homeTeam, visitorTeam));
+        teamCreator.addChances(visitorTeam,
+                calculator.CalcBaseChance(visitorTeam, homeTeam),
+                calculator.CalcMinuteChance(visitorTeam, homeTeam));
+
+        //System.out.println(homeTeam);
     }
 }

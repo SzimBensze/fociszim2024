@@ -13,7 +13,7 @@ public class Formations {
         formations.put("3-6-1", new Formation("3-6-1", 0, 11, 2));
         formations.put("4-3-3", new Formation("4-3-3", 6, 7, 0));
         formations.put("4-4-2", new Formation("4-4-2", 7, 7, 1));
-        formations.put("4-5-1", new Formation("4-5-1", 2, 9, 2));
+        formations.put("4-5-1", new Formation("4-5-1", 1, 9, 3));
         formations.put("4-6-0", new Formation("4-6-0", 5, 12, -4));
         formations.put("5-3-2", new Formation("5-3-2", -2, 4, 11));
         formations.put("5-4-1", new Formation("5-4-1", -5, 6, 12));
@@ -24,7 +24,7 @@ public class Formations {
         formations.put("4-2-2-2", new Formation("4-2-2-2", 4, 4, 5));
         formations.put("4-2-3-1", new Formation("4-2-3-1", 7, 1, 5));
         formations.put("4-3-1-2", new Formation("4-3-1-2", 3, 1, 9));
-        formations.put("4-4-1-1", new Formation("4-4-1-1", 2, 6, 5));
+        formations.put("4-4-1-1", new Formation("4-4-1-1", 2, 7, 4));
         formations.put("5-2-1-2", new Formation("5-2-1-2", -4, 4, 13));
         formations.put("5-2-2-1", new Formation("5-2-2-1", 6, -1, 8));
         formations.put("3-2-2-2-1", new Formation("3-2-2-2-1", -1, 4, 10));

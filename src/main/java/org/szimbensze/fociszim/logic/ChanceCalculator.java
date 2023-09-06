@@ -12,11 +12,10 @@ public class ChanceCalculator {
         this.baseChance = baseChance;
     }
 
-    public Float CalcBaseChance(Team selected, Team opponent, Float baseChance) {
-        Float chance = baseChance + (selected.getAtk() * selected.getLuck() - opponent.getDef() +
+    public Float CalcBaseChance(Team selected, Team opponent) {
+        return baseChance + (selected.getAtk() * selected.getLuck() - opponent.getDef() +
                 selected.getMid() - opponent.getMid() +
                 selected.getDef() - opponent.getAtk() * opponent.getLuck());
-        return chance;
     }
 
     public Float CalcMinuteChance(Team selected, Team opponent) {

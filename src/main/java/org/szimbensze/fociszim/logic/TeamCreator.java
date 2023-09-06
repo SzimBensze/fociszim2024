@@ -39,4 +39,16 @@ public class TeamCreator {
         selectedTeam.setFormation(Formations.getFormation(rawFormation));
     }
 
+    private void addFormationPoints(Team selectedTeam) {
+        selectedTeam.setAtk(selectedTeam.getAtk() + selectedTeam.getFormation().addedAtk());
+        selectedTeam.setMid(selectedTeam.getMid() + selectedTeam.getFormation().addedMid());
+        selectedTeam.setDef(selectedTeam.getDef() + selectedTeam.getFormation().addedDef());
+    }
+
+    public void addChances(Team selectedTeam, Float baseChance, Float minuteChance) {
+        selectedTeam.setBaseChance(baseChance);
+        addFormationPoints(selectedTeam);
+        selectedTeam.setMinuteChance(minuteChance);
+    }
+
 }
