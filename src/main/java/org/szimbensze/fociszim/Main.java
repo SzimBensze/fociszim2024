@@ -30,13 +30,12 @@ public class Main {
         printer.printTeam(visitorTeam);
         printer.printDivider();
 
-        teamCreator.addChances(homeTeam,
-                calculator.CalcBaseChance(homeTeam, visitorTeam),
-                calculator.CalcMinuteChance(homeTeam, visitorTeam));
-        teamCreator.addChances(visitorTeam,
-                calculator.CalcBaseChance(visitorTeam, homeTeam),
-                calculator.CalcMinuteChance(visitorTeam, homeTeam));
+        teamCreator.addBaseChance(homeTeam, calculator.CalcBaseChance(homeTeam, visitorTeam));
+        teamCreator.addBaseChance(visitorTeam, calculator.CalcBaseChance(visitorTeam, homeTeam));
+        teamCreator.addMinuteChance(homeTeam, calculator.CalcMinuteChance(homeTeam, visitorTeam));
+        teamCreator.addMinuteChance(visitorTeam, calculator.CalcMinuteChance(visitorTeam, homeTeam));
 
         //System.out.println(homeTeam);
+        //System.out.println(visitorTeam);
     }
 }

@@ -21,7 +21,7 @@ public class TeamCreator {
         addPoints(selectedTeam, userInput.inputPoints(selectedTeam.getName(), "atk"),
             userInput.inputPoints(selectedTeam.getName(), "mid"),
             userInput.inputPoints(selectedTeam.getName(), "def"));
-        addLuck(selectedTeam);
+        addLuck(selectedTeam, 1F, 0.5F);
     }
 
     private void addPoints(Team selectedTeam, Integer atk, Integer mid, Integer def) {
@@ -30,8 +30,8 @@ public class TeamCreator {
         selectedTeam.setDef(def);
     }
 
-    private void addLuck(Team selectedTeam) {
-        selectedTeam.setLuck(1F + random.nextFloat() * 0.5F);
+    private void addLuck(Team selectedTeam, Float baseLuck, Float luckMultiplier) {
+        selectedTeam.setLuck(baseLuck + random.nextFloat() * luckMultiplier);
     }
 
     public void addFormation(Team selectedTeam) {
@@ -45,9 +45,13 @@ public class TeamCreator {
         selectedTeam.setDef(selectedTeam.getDef() + selectedTeam.getFormation().addedDef());
     }
 
-    public void addChances(Team selectedTeam, Float baseChance, Float minuteChance) {
+    public void addBaseChance(Team selectedTeam, Float baseChance) {
         selectedTeam.setBaseChance(baseChance);
+    }
+
+    public void addMinuteChance(Team selectedTeam, Float minuteChance) {
         addFormationPoints(selectedTeam);
+        addLuck(selectedTeam, 0.7F, 0.3F);
         selectedTeam.setMinuteChance(minuteChance);
     }
 
