@@ -22,6 +22,7 @@ public class TeamCreator {
             userInput.inputPoints(selectedTeam.getName(), "mid"),
             userInput.inputPoints(selectedTeam.getName(), "def"));
         addLuck(selectedTeam, 1F, 0.5F);
+        addFormation(selectedTeam);
     }
 
     private void addPoints(Team selectedTeam, Integer atk, Integer mid, Integer def) {
@@ -34,7 +35,7 @@ public class TeamCreator {
         selectedTeam.setLuck(baseLuck + random.nextFloat() * luckMultiplier);
     }
 
-    public void addFormation(Team selectedTeam) {
+    private void addFormation(Team selectedTeam) {
         String rawFormation = userInput.inputFormation(selectedTeam.getName());
         selectedTeam.setFormation(Formations.getFormation(rawFormation));
     }

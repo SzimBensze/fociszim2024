@@ -11,7 +11,7 @@ public abstract class Team {
     Float baseChance;
     Float minuteChance;
     Float minuteChanceModifier;
-    Float minuteDecreaseMultiplier;
+    Float chanceDecreaseNumber;
 
     public String getName() {
         return name;
@@ -85,12 +85,12 @@ public abstract class Team {
         this.minuteChanceModifier = minuteChanceModifier;
     }
 
-    public Float getMinuteDecreaseMultiplier() {
-        return minuteDecreaseMultiplier;
+    public Float getChanceDecreaseNumber() {
+        return chanceDecreaseNumber;
     }
 
-    public void setMinuteDecreaseMultiplier(Float minuteDecreaseMultiplier) {
-        this.minuteDecreaseMultiplier = minuteDecreaseMultiplier;
+    public void setChanceDecreaseNumber(Float chanceDecreaseNumber) {
+        this.chanceDecreaseNumber = chanceDecreaseNumber;
     }
 
     @Override
@@ -105,7 +105,7 @@ public abstract class Team {
                 ", baseChance=" + baseChance +
                 ", minuteChance=" + minuteChance +
                 ", minuteChanceModifier=" + minuteChanceModifier +
-                ", minuteDecreaseMultiplier=" + minuteDecreaseMultiplier +
+                ", chanceDecreaseNumber=" + chanceDecreaseNumber +
                 '}';
     }
 }

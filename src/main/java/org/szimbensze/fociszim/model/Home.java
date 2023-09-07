@@ -2,9 +2,10 @@ package org.szimbensze.fociszim.model;
 
 public class Home extends Team {
 
-    @Override
-    public void setMinuteChanceModifier(Float minuteChanceModifier) {
-        minuteChanceModifier = Float.valueOf("0.015");
+    public Home() {
+        super();
+        setMinuteChanceModifier(0.0022F);
+        setChanceDecreaseNumber(0.0171F);
     }
 
 }

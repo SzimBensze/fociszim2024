@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class UserInput {
 
-    Scanner sc = new Scanner(System.in);
+    static Scanner sc = new Scanner(System.in);
 
     public String inputName(Team currentTeam) {
         if (currentTeam.getClass().equals(Home.class)) System.out.printf("Type name for home team: ");
@@ -47,6 +47,16 @@ public class UserInput {
             String rawFormation = sc.nextLine();
             Matcher matcher = pattern.matcher(rawFormation);
             if (matcher.find()) return rawFormation;
+        }
+    }
+
+    public static boolean inputYesNo(String question) {
+        System.out.println(question);
+        while (true) {
+            System.out.print("Please answer with yes/no (y/n): ");
+            String answer = sc.nextLine();
+            if (answer.equalsIgnoreCase("y") || answer.equalsIgnoreCase("yes")) return true;
+            else if (answer.equalsIgnoreCase("n") || answer.equalsIgnoreCase("no")) return false;
         }
     }
 
