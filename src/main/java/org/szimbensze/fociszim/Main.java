@@ -38,5 +38,10 @@ public class Main {
             System.out.println(homeTeam);
             System.out.println(visitorTeam);
         }
+
+        Match90 newMatch = new Match90(homeTeam, visitorTeam);
+        newMatch.initiateMatch();
+        //System.out.println(newMatch);
+
     }
 }
