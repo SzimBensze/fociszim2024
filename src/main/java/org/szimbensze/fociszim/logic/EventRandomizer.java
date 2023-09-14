@@ -1,8 +1,6 @@
 package org.szimbensze.fociszim.logic;
 
-import org.szimbensze.fociszim.model.EventType;
-import org.szimbensze.fociszim.model.FootballEvent;
-import org.szimbensze.fociszim.model.Team;
+import org.szimbensze.fociszim.model.*;
 
 import java.util.*;
 
@@ -16,12 +14,12 @@ public class EventRandomizer {
             EventType chosenEvent = EventType.values()[random.nextInt(EventType.values().length)];
             if (chosenEvent.affectBothTeams)
                 randomEvents.put(random.nextInt(minMinute, maxMinute),
-                    new FootballEvent(teams, chosenEvent));
+                        new TwoTeamEvent(chosenEvent, teams));
+            else if (chosenEvent.canBeVar)
+                randomEvents.put(random.nextInt(minMinute, maxMinute),
+                        new SingleTeamEvent(chosenEvent, random.nextBoolean(), teams.get(random.nextInt(teams.size()))));
             else randomEvents.put(random.nextInt(minMinute, maxMinute),
-                new FootballEvent(
-                        new ArrayList<>(
-                                Collections.singletonList(
-                                        teams.get(random.nextInt(teams.size())))), chosenEvent));
+                        new SingleTeamEvent(chosenEvent, null, teams.get(random.nextInt(teams.size()))));
         }
         return randomEvents;
     }
