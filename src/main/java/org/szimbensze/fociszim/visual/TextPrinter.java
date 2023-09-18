@@ -1,8 +1,8 @@
 package org.szimbensze.fociszim.visual;
 
-import org.szimbensze.fociszim.model.Home;
-import org.szimbensze.fociszim.model.Team;
-import org.szimbensze.fociszim.model.Visitor;
+import org.szimbensze.fociszim.model.team_elements.Home;
+import org.szimbensze.fociszim.model.team_elements.Team;
+import org.szimbensze.fociszim.model.team_elements.Visitor;
 
 public class TextPrinter {
 
@@ -24,13 +24,13 @@ public class TextPrinter {
 
     public static void printInitiation() throws InterruptedException {
         System.out.println("Simulation initiated!");
-        Thread.sleep(1500);
-        System.out.println("Preparing the field...");
-        Thread.sleep(1600);
-        System.out.println("The players are warming up...");
         Thread.sleep(1300);
+        System.out.println("Preparing the field...");
+        Thread.sleep(1400);
+        System.out.println("The players are warming up...");
+        Thread.sleep(1500);
         System.out.println("Kickoff!");
-        Thread.sleep(400);
+        Thread.sleep(700);
     }
 
     public static void printRound(Integer minute) {

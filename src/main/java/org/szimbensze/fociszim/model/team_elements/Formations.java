@@ -1,4 +1,4 @@
-package org.szimbensze.fociszim.model;
+package org.szimbensze.fociszim.model.team_elements;
 
 import java.util.HashMap;
 import java.util.Map;

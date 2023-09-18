@@ -1,4 +1,4 @@
-package org.szimbensze.fociszim.model;
+package org.szimbensze.fociszim.model.team_elements;
 
 public class Home extends Team {
 

@@ -1,4 +1,4 @@
-package org.szimbensze.fociszim.model;
+package org.szimbensze.fociszim.model.events;
 
 public enum EventType {
 

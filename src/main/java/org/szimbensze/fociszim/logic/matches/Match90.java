@@ -1,6 +1,6 @@
-package org.szimbensze.fociszim.logic;
+package org.szimbensze.fociszim.logic.matches;
 
-import org.szimbensze.fociszim.model.Team;
+import org.szimbensze.fociszim.model.team_elements.Team;
 import org.szimbensze.fociszim.visual.TextPrinter;
 
 public class Match90 extends Match {

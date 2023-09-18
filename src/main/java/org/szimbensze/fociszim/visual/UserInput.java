@@ -1,8 +1,8 @@
 package org.szimbensze.fociszim.visual;
 
-import org.szimbensze.fociszim.model.Home;
-import org.szimbensze.fociszim.model.Team;
-import org.szimbensze.fociszim.model.Visitor;
+import org.szimbensze.fociszim.model.team_elements.Home;
+import org.szimbensze.fociszim.model.team_elements.Team;
+import org.szimbensze.fociszim.model.team_elements.Visitor;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;

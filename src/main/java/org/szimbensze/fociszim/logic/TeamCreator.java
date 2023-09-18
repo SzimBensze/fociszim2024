@@ -1,6 +1,9 @@
 package org.szimbensze.fociszim.logic;
 
-import org.szimbensze.fociszim.model.*;
+import org.szimbensze.fociszim.model.team_elements.Formations;
+import org.szimbensze.fociszim.model.team_elements.Home;
+import org.szimbensze.fociszim.model.team_elements.Team;
+import org.szimbensze.fociszim.model.team_elements.Visitor;
 import org.szimbensze.fociszim.visual.UserInput;
 
 import java.util.Random;

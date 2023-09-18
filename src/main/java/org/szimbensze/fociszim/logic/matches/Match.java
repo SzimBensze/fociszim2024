@@ -1,7 +1,8 @@
-package org.szimbensze.fociszim.logic;
+package org.szimbensze.fociszim.logic.matches;
 
-import org.szimbensze.fociszim.model.FootballEvent;
-import org.szimbensze.fociszim.model.Team;
+import org.szimbensze.fociszim.logic.EventRandomizer;
+import org.szimbensze.fociszim.model.events.FootballEvent;
+import org.szimbensze.fociszim.model.team_elements.Team;
 import org.szimbensze.fociszim.visual.TextPrinter;
 
 import java.util.ArrayList;

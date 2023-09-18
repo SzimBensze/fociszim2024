@@ -1,9 +1,10 @@
 package org.szimbensze.fociszim;
 
 import org.szimbensze.fociszim.logic.*;
-import org.szimbensze.fociszim.model.Home;
-import org.szimbensze.fociszim.model.Team;
-import org.szimbensze.fociszim.model.Visitor;
+import org.szimbensze.fociszim.logic.matches.Match90;
+import org.szimbensze.fociszim.model.team_elements.Home;
+import org.szimbensze.fociszim.model.team_elements.Team;
+import org.szimbensze.fociszim.model.team_elements.Visitor;
 import org.szimbensze.fociszim.visual.TextPrinter;
 import org.szimbensze.fociszim.visual.UserInput;
 

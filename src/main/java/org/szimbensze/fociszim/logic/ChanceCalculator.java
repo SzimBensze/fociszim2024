@@ -1,6 +1,6 @@
 package org.szimbensze.fociszim.logic;
 
-import org.szimbensze.fociszim.model.Team;
+import org.szimbensze.fociszim.model.team_elements.Team;
 
 public class ChanceCalculator {
 

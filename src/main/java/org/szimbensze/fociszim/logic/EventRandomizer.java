@@ -1,6 +1,10 @@
 package org.szimbensze.fociszim.logic;
 
-import org.szimbensze.fociszim.model.*;
+import org.szimbensze.fociszim.model.events.EventType;
+import org.szimbensze.fociszim.model.events.FootballEvent;
+import org.szimbensze.fociszim.model.events.SingleTeamEvent;
+import org.szimbensze.fociszim.model.events.TwoTeamEvent;
+import org.szimbensze.fociszim.model.team_elements.Team;
 
 import java.util.*;
 

@@ -1,4 +1,6 @@
-package org.szimbensze.fociszim.model;
+package org.szimbensze.fociszim.model.events;
+
+import org.szimbensze.fociszim.model.team_elements.Team;
 
 public class SingleTeamEvent extends FootballEvent {
 
