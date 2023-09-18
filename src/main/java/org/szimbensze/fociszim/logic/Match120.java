@@ -8,6 +8,7 @@ public class Match120 extends Match {
         super(team1, team2);
         setFirstMinute(91);
         setLastMinute(121);
+        setHalfTime(105);
         setMaxEventAmount(3);
     }
 

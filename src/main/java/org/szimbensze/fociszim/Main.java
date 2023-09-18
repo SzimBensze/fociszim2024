@@ -8,26 +8,24 @@ import org.szimbensze.fociszim.visual.TextPrinter;
 import org.szimbensze.fociszim.visual.UserInput;
 
 public class Main {
-    public static void main(String[] args) throws IncorrectTeamTypeException {
-        TextPrinter printer = new TextPrinter();
+    public static void main(String[] args) throws IncorrectTeamTypeException, InterruptedException {
+
         System.out.println("Szim's Football Simulator 2024");
         System.out.println("The program is currently work in progress! There's not much to look at yet, please check back later.");
-        printer.printDivider();
+        TextPrinter.printDivider();
 
         TeamCreator teamCreator = new TeamCreator();
         ChanceCalculator calculator = new ChanceCalculator(500F);
 
         Team homeTeam = teamCreator.createTeam(Home.class);
         teamCreator.addStats(homeTeam);
-        printer.printDivider();
-        printer.printTeam(homeTeam);
-        printer.printDivider();
+        TextPrinter.printTeam(homeTeam);
+        TextPrinter.printDivider();
 
         Team visitorTeam = teamCreator.createTeam(Visitor.class);
         teamCreator.addStats(visitorTeam);
-        printer.printDivider();
-        printer.printTeam(visitorTeam);
-        printer.printDivider();
+        TextPrinter.printTeam(visitorTeam);
+        TextPrinter.printDivider();
 
         teamCreator.addBaseChance(homeTeam, calculator.CalcBaseChance(homeTeam, visitorTeam));
         teamCreator.addBaseChance(visitorTeam, calculator.CalcBaseChance(visitorTeam, homeTeam));
@@ -40,8 +38,7 @@ public class Main {
         }
 
         Match90 baseMatch = new Match90(homeTeam, visitorTeam);
-        baseMatch.initiateMatch();
-        System.out.println(baseMatch);
+        baseMatch.initiateMatch(1F);
 
     }
 }

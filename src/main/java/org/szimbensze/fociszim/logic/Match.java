@@ -2,10 +2,12 @@ package org.szimbensze.fociszim.logic;
 
 import org.szimbensze.fociszim.model.FootballEvent;
 import org.szimbensze.fociszim.model.Team;
+import org.szimbensze.fociszim.visual.TextPrinter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Random;
 
 public abstract class Match {
 
@@ -13,8 +15,11 @@ public abstract class Match {
     Team teamTwo;
     Integer firstMinute;
     Integer lastMinute;
+    Integer halfTime;
     Integer currentMinute;
+    Float chanceMultiplier;
     EventRandomizer eventRandom = new EventRandomizer();
+    Random random = new Random();
     Integer maxEventAmount;
     Map<Integer, FootballEvent> events;
 
@@ -39,8 +44,24 @@ public abstract class Match {
         this.lastMinute = lastMinute;
     }
 
+    public Integer getHalfTime() {
+        return halfTime;
+    }
+
+    public void setHalfTime(Integer halfTime) {
+        this.halfTime = halfTime;
+    }
+
     public Integer getCurrentMinute() {
         return currentMinute;
+    }
+
+    public Float getChanceMultiplier() {
+        return chanceMultiplier;
+    }
+
+    public void setChanceMultiplier(Float chanceMultiplier) {
+        this.chanceMultiplier = chanceMultiplier;
     }
 
     public Integer getMaxEventAmount() {
@@ -59,9 +80,42 @@ public abstract class Match {
         this.events = events;
     }
 
-    public void initiateMatch() {
+    public void initiateMatch(Float defaultChanceMultiplier) throws InterruptedException {
         events = eventRandom.createEvents(firstMinute, lastMinute, maxEventAmount, new ArrayList<>(Arrays.asList(teamOne, teamTwo)));
         currentMinute = firstMinute;
+        chanceMultiplier = defaultChanceMultiplier;
+        try {
+            playMatch();
+        } catch (InterruptedException e) {
+            TextPrinter.printInterrupted();
+        }
+    }
+
+    private void playMatch() throws InterruptedException {
+        while (currentMinute < lastMinute) {
+            TextPrinter.printRound(currentMinute);
+            if (checkShot(teamOne, chanceMultiplier)) {
+                TextPrinter.printShot(teamOne, shoot(teamOne));
+            }
+            if (checkShot(teamTwo, chanceMultiplier)) {
+                TextPrinter.printShot(teamTwo, shoot(teamTwo));
+            }
+            if (currentMinute.equals(halfTime)) doHalftime();
+            currentMinute++;
+            Thread.sleep(500);
+        }
+    }
+
+    private boolean checkShot(Team currentTeam, Float chanceMultiplier) {
+        return random.nextFloat() < currentTeam.getMinuteChance() * chanceMultiplier;
+    }
+
+    private boolean shoot(Team currentTeam) {
+        return false;
+    }
+
+    private void doHalftime() throws InterruptedException {
+        TextPrinter.printHalftime();
     }
 
     @Override
@@ -71,6 +125,7 @@ public abstract class Match {
                 ", teamTwo=" + teamTwo +
                 ", firstMinute=" + firstMinute +
                 ", lastMinute=" + lastMinute +
+                ", halfTime=" + halfTime +
                 ", currentMinute=" + currentMinute +
                 ", maxEventAmount=" + maxEventAmount +
                 ", events=" + events +

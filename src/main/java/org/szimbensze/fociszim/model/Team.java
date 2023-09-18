@@ -12,6 +12,13 @@ public abstract class Team {
     Float minuteChance;
     Float minuteChanceModifier;
     Float chanceDecreaseNumber;
+    Integer shots;
+    Integer goals;
+
+    public Team() {
+        shots = 0;
+        goals = 0;
+    }
 
     public String getName() {
         return name;
@@ -93,6 +100,22 @@ public abstract class Team {
         this.chanceDecreaseNumber = chanceDecreaseNumber;
     }
 
+    public Integer getShots() {
+        return shots;
+    }
+
+    public void setShots(Integer shots) {
+        this.shots = shots;
+    }
+
+    public Integer getGoals() {
+        return goals;
+    }
+
+    public void setGoals(Integer goals) {
+        this.goals = goals;
+    }
+
     @Override
     public String toString() {
         return "Team{" +
@@ -106,6 +129,9 @@ public abstract class Team {
                 ", minuteChance=" + minuteChance +
                 ", minuteChanceModifier=" + minuteChanceModifier +
                 ", chanceDecreaseNumber=" + chanceDecreaseNumber +
+                ", shots=" + shots +
+                ", goals=" + goals +
                 '}';
     }
+
 }
