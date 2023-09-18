@@ -12,6 +12,7 @@ public abstract class Team {
     Float minuteChance;
     Float minuteChanceModifier;
     Float chanceDecreaseNumber;
+    Float shotChanceMultiplier;
     Integer shots;
     Integer goals;
 
@@ -100,6 +101,14 @@ public abstract class Team {
         this.chanceDecreaseNumber = chanceDecreaseNumber;
     }
 
+    public Float getShotChanceMultiplier() {
+        return shotChanceMultiplier;
+    }
+
+    public void setShotChanceMultiplier(Float shotChanceMultiplier) {
+        this.shotChanceMultiplier = shotChanceMultiplier;
+    }
+
     public Integer getShots() {
         return shots;
     }
@@ -129,6 +138,7 @@ public abstract class Team {
                 ", minuteChance=" + minuteChance +
                 ", minuteChanceModifier=" + minuteChanceModifier +
                 ", chanceDecreaseNumber=" + chanceDecreaseNumber +
+                ", shotChanceMultiplier" + shotChanceMultiplier +
                 ", shots=" + shots +
                 ", goals=" + goals +
                 '}';

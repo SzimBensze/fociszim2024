@@ -95,10 +95,10 @@ public abstract class Match {
         while (currentMinute < lastMinute) {
             TextPrinter.printRound(currentMinute);
             if (checkShot(teamOne, chanceMultiplier)) {
-                TextPrinter.printShot(teamOne, shoot(teamOne));
+                TextPrinter.printShot(teamOne, shoot(teamOne, teamTwo, chanceMultiplier));
             }
             if (checkShot(teamTwo, chanceMultiplier)) {
-                TextPrinter.printShot(teamTwo, shoot(teamTwo));
+                TextPrinter.printShot(teamTwo, shoot(teamTwo, teamOne, chanceMultiplier));
             }
             if (currentMinute.equals(halfTime)) doHalftime();
             currentMinute++;
@@ -110,8 +110,14 @@ public abstract class Match {
         return random.nextFloat() < currentTeam.getMinuteChance() * chanceMultiplier;
     }
 
-    private boolean shoot(Team currentTeam) {
-        return false;
+    private boolean shoot(Team currentTeam, Team opponentTeam, Float chanceMultiplier) {
+        currentTeam.setShots(currentTeam.getShots() + 1);
+        boolean successfulShot = random.nextFloat() < currentTeam.getMinuteChance() *
+                (chanceMultiplier +
+                        currentTeam.getAtk().floatValue() / 100F -
+                        opponentTeam.getDef().floatValue() / 100F);
+        if (successfulShot) currentTeam.setGoals(currentTeam.getGoals() + 1);
+        return successfulShot;
     }
 
     private void doHalftime() throws InterruptedException {

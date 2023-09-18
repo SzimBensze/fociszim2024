@@ -39,6 +39,6 @@ public class Main {
 
         Match90 baseMatch = new Match90(homeTeam, visitorTeam);
         baseMatch.initiateMatch(1F);
-
+        //System.out.println(baseMatch);
     }
 }
