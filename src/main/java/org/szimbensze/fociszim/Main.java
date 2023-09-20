@@ -1,6 +1,7 @@
 package org.szimbensze.fociszim;
 
 import org.szimbensze.fociszim.logic.*;
+import org.szimbensze.fociszim.logic.matches.Match120;
 import org.szimbensze.fociszim.logic.matches.Match90;
 import org.szimbensze.fociszim.model.team_elements.Home;
 import org.szimbensze.fociszim.model.team_elements.Team;
@@ -40,6 +41,11 @@ public class Main {
 
         Match90 baseMatch = new Match90(homeTeam, visitorTeam);
         baseMatch.initiateMatch(1F);
-        //System.out.println(baseMatch);
+        if (baseMatch.getWinner() == null) if (UserInput.inputYesNo("")) {
+            Match120 extraTime = new Match120(homeTeam, visitorTeam);
+            extraTime.initiateMatch(1.05F);
+        }
+        else TextPrinter.printWinner(baseMatch.getWinner());
+        //Thread.sleep(Long.MAX_VALUE);
     }
 }

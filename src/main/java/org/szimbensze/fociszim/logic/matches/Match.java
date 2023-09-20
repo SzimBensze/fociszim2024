@@ -101,10 +101,15 @@ public abstract class Match {
             if (checkShot(teamTwo, chanceMultiplier)) {
                 TextPrinter.printShot(teamTwo, shoot(teamTwo, teamOne, chanceMultiplier));
             }
+            teamOne.setMinuteChance(teamOne.getMinuteChance() + teamOne.getMinuteChanceModifier() - (teamTwo.getAtk() + teamTwo.getMid() + teamTwo.getDef()) / 100000F);
+            teamTwo.setMinuteChance(teamTwo.getMinuteChance() + teamTwo.getMinuteChanceModifier() - (teamOne.getAtk() + teamOne.getMid() + teamOne.getDef()) / 100000F);
+            if (teamOne.getMinuteChance() < 0) teamOne.setMinuteChance(0.0001F);
+            if (teamTwo.getMinuteChance() < 0) teamTwo.setMinuteChance(0.0001F);
             if (currentMinute.equals(halfTime)) doHalftime();
             currentMinute++;
             Thread.sleep(500);
         }
+        TextPrinter.printGoalStats(teamOne, teamTwo);
     }
 
     private boolean checkShot(Team currentTeam, Float chanceMultiplier) {
@@ -117,12 +122,21 @@ public abstract class Match {
                 (chanceMultiplier +
                         currentTeam.getAtk().floatValue() / 100F -
                         opponentTeam.getDef().floatValue() / 100F);
-        if (successfulShot) currentTeam.setGoals(currentTeam.getGoals() + 1);
+        if (successfulShot) {
+            currentTeam.setGoals(currentTeam.getGoals() + 1);
+            currentTeam.setMinuteChance(currentTeam.getMinuteChance() - currentTeam.getChanceDecreaseNumber());
+        }
         return successfulShot;
     }
 
     private void doHalftime() throws InterruptedException {
-        TextPrinter.printHalftime();
+        TextPrinter.printHalftime(teamOne, teamTwo);
+    }
+
+    public Team getWinner() {
+        if (teamOne.getGoals() > teamTwo.getGoals()) return teamOne;
+        else if (teamTwo.getGoals() > teamOne.getGoals()) return teamTwo;
+        else return null;
     }
 
     @Override

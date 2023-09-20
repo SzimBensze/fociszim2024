@@ -125,6 +125,11 @@ public abstract class Team {
         this.goals = goals;
     }
 
+    public Float getAccuracy() {
+        if (shots.equals(0)) return 0F;
+        else return goals.floatValue() / shots.floatValue() * 100F;
+    }
+
     @Override
     public String toString() {
         return "Team{" +

@@ -48,9 +48,26 @@ public class TextPrinter {
         else System.out.printf("%s missed shot%n", team.getName());
     }
 
-    public static void printHalftime() throws InterruptedException {
+    public static void printHalftime(Team teamOne, Team teamTwo) throws InterruptedException {
         System.out.println("Half-time!");
-        System.out.println("TODO PRINT HALFTIME STATS");
+        printGoalStats(teamOne, teamTwo);
+        Thread.sleep(3000);
+    }
+
+    public static void printWinner(Team winner) {
+        if (winner == null) System.out.println("The match is a tie! Congratulations to both teams.");
+        else System.out.printf("%s won the match! Congratulations!", winner.getName());
+    }
+
+    public static void printGoalStats(Team leftTeam, Team rightTeam) throws InterruptedException {
+        System.out.println("-----");
+        System.out.println("Match statistics:");
+        System.out.printf("%s - %s Goals: %s - %s Shots: %s - %s Accuracy: %s%% - %s%%%n",
+                leftTeam.getName(), rightTeam.getName(),
+                leftTeam.getGoals(), rightTeam.getGoals(),
+                leftTeam.getShots(), rightTeam.getShots(),
+                Math.round(leftTeam.getAccuracy()),
+                Math.round(rightTeam.getAccuracy()));
         Thread.sleep(3000);
     }
 
