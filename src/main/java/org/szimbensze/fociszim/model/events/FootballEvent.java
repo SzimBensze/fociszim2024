@@ -8,4 +8,8 @@ public abstract class FootballEvent {
         this.type = type;
     }
 
+    public EventType getType() {
+        return type;
+    }
+
 }

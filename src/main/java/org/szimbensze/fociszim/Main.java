@@ -8,6 +8,7 @@ import org.szimbensze.fociszim.model.team_elements.Visitor;
 import org.szimbensze.fociszim.visual.*;
 
 public class Main {
+
     public static void main(String[] args) throws IncorrectTeamTypeException, InterruptedException {
 
         System.out.println("Szim's Football Simulator 2024");
@@ -34,4 +35,5 @@ public class Main {
         else TextPrinter.printWinner(baseMatch.getWinner());
         //Thread.sleep(Long.MAX_VALUE);
     }
+
 }

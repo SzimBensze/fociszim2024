@@ -12,7 +12,7 @@ public class Formations {
         formations.put("3-5-2", new Formation("3-5-2", 8, 4, 1));
         formations.put("3-6-1", new Formation("3-6-1", 0, 11, 2));
         formations.put("4-3-3", new Formation("4-3-3", 6, 7, 0));
-        formations.put("4-4-2", new Formation("4-4-2", 7, 7, 1));
+        formations.put("4-4-2", new Formation("4-4-2", 7, 7, -1));
         formations.put("4-5-1", new Formation("4-5-1", 1, 9, 3));
         formations.put("4-6-0", new Formation("4-6-0", 5, 12, -4));
         formations.put("5-3-2", new Formation("5-3-2", -2, 4, 11));

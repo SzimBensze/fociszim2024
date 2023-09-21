@@ -6,11 +6,15 @@ import java.util.List;
 
 public class TwoTeamEvent extends FootballEvent {
 
-    List<Team> affectedTeams;
+    private List<Team> affectedTeams;
 
     public TwoTeamEvent(EventType type, List<Team> affectedTeams) {
         super(type);
         this.affectedTeams = affectedTeams;
+    }
+
+    public List<Team> getAffectedTeams() {
+        return affectedTeams;
     }
 
 }

@@ -22,6 +22,13 @@ public class Match90 extends Match {
         super.initiateMatch(defaultChanceMultiplier);
     }
 
+    @Override
+    protected void doHalftime() throws InterruptedException {
+        if (teamOne.getShots() < 5 && teamOne.getGoals() == 0) teamOne.setMinuteChance(teamOne.getMinuteChance() + teamOne.getMinuteChanceModifier() * 2F);
+        if (teamTwo.getShots() < 5 && teamTwo.getGoals() == 0) teamTwo.setMinuteChance(teamTwo.getMinuteChance() + teamTwo.getMinuteChanceModifier() * 2F);
+        TextPrinter.printHalftime(teamOne, teamTwo, "Half-time!");
+    }
+
     public void createTeams() {
         TeamCreator teamCreator = new TeamCreator();
         ChanceCalculator calculator = new ChanceCalculator(500F);

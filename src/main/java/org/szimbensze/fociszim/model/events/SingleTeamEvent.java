@@ -4,13 +4,21 @@ import org.szimbensze.fociszim.model.team_elements.Team;
 
 public class SingleTeamEvent extends FootballEvent {
 
-    Team affectedTeam;
-    Boolean isVar;
+    private final Team affectedTeam;
+    private final boolean isVar;
 
     public SingleTeamEvent(EventType type, Boolean isVar, Team affectedTeam) {
         super(type);
         this.affectedTeam = affectedTeam;
         this.isVar = isVar;
+    }
+
+    public Team getAffectedTeam() {
+        return affectedTeam;
+    }
+
+    public boolean getVar() {
+        return isVar;
     }
 
 }

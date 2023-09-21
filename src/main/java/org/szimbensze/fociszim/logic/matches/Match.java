@@ -2,6 +2,8 @@ package org.szimbensze.fociszim.logic.matches;
 
 import org.szimbensze.fociszim.logic.EventRandomizer;
 import org.szimbensze.fociszim.model.events.FootballEvent;
+import org.szimbensze.fociszim.model.events.IncorrectEventTypeException;
+import org.szimbensze.fociszim.model.events.SingleTeamEvent;
 import org.szimbensze.fociszim.model.team_elements.Team;
 import org.szimbensze.fociszim.visual.TextPrinter;
 
@@ -101,6 +103,8 @@ public abstract class Match {
             if (checkShot(teamTwo, chanceMultiplier)) {
                 TextPrinter.printShot(teamTwo, shoot(teamTwo, teamOne, chanceMultiplier));
             }
+            checkEvent();
+
             teamOne.setMinuteChance(teamOne.getMinuteChance() + teamOne.getMinuteChanceModifier() - (teamTwo.getAtk() + teamTwo.getMid() + teamTwo.getDef()) / 100000F);
             teamTwo.setMinuteChance(teamTwo.getMinuteChance() + teamTwo.getMinuteChanceModifier() - (teamOne.getAtk() + teamOne.getMid() + teamOne.getDef()) / 100000F);
             if (teamOne.getMinuteChance() < 0) teamOne.setMinuteChance(0.0001F);
@@ -129,8 +133,50 @@ public abstract class Match {
         return successfulShot;
     }
 
-    private void doHalftime() throws InterruptedException {
-        TextPrinter.printHalftime(teamOne, teamTwo);
+    private boolean shootPenalty(Team currentTeam, Float hitMaxValue) {
+        currentTeam.setShots(currentTeam.getShots() + 1);
+        boolean successfulShot = random.nextFloat(hitMaxValue) < currentTeam.getBaseChance();
+        if (successfulShot) currentTeam.setGoals(currentTeam.getGoals() + 1);
+        return successfulShot;
+    }
+
+    protected abstract void doHalftime() throws InterruptedException;
+
+    private void checkEvent() throws InterruptedException {
+        if (events.containsKey(currentMinute)) {
+            try {
+                playEvent(events.get(currentMinute));
+            } catch (IncorrectEventTypeException e) {
+                //TODO event incorrect type message
+            }
+        }
+    }
+
+    private void playEvent(FootballEvent event) throws InterruptedException, IncorrectEventTypeException {
+        if (event instanceof SingleTeamEvent) {
+            TextPrinter.printSingleEvent((SingleTeamEvent) event);
+            switch (event.getType()) {
+                case PENALTY -> {
+                    Team penaltyTaker = ((SingleTeamEvent) event).getAffectedTeam();
+                    TextPrinter.printShot(penaltyTaker, shootPenalty(penaltyTaker, 1000F));
+                }
+                case VAR_GOAL -> {
+                    Team givenTeam = ((SingleTeamEvent) event).getAffectedTeam();
+                    givenTeam.setShots(givenTeam.getShots() + 1);
+                    givenTeam.setGoals(givenTeam.getGoals() + 1);
+                    TextPrinter.printShot(givenTeam, true);
+                }
+                default -> {
+                    if (((SingleTeamEvent) event).getVar())
+                        ((SingleTeamEvent) event).getAffectedTeam().setMinuteChance(
+                            ((SingleTeamEvent) event).getAffectedTeam().getMinuteChance()
+                                    + event.getType().chanceModifier);
+                    else ((SingleTeamEvent) event).getAffectedTeam().setMinuteChance(
+                            ((SingleTeamEvent) event).getAffectedTeam().getMinuteChance()
+                                    + event.getType().chanceModifier * 2);
+                }
+            }
+        }
     }
 
     public Team getWinner() {

@@ -23,7 +23,7 @@ public class EventRandomizer {
                 randomEvents.put(random.nextInt(minMinute, maxMinute),
                         new SingleTeamEvent(chosenEvent, random.nextBoolean(), teams.get(random.nextInt(teams.size()))));
             else randomEvents.put(random.nextInt(minMinute, maxMinute),
-                        new SingleTeamEvent(chosenEvent, null, teams.get(random.nextInt(teams.size()))));
+                        new SingleTeamEvent(chosenEvent, false, teams.get(random.nextInt(teams.size()))));
         }
         return randomEvents;
     }

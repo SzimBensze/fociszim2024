@@ -1,8 +1,13 @@
 package org.szimbensze.fociszim.visual;
 
+import org.szimbensze.fociszim.model.events.IncorrectEventTypeException;
+import org.szimbensze.fociszim.model.events.SingleTeamEvent;
+import org.szimbensze.fociszim.model.events.TwoTeamEvent;
 import org.szimbensze.fociszim.model.team_elements.Home;
 import org.szimbensze.fociszim.model.team_elements.Team;
 import org.szimbensze.fociszim.model.team_elements.Visitor;
+
+import java.util.stream.IntStream;
 
 public class TextPrinter {
 
@@ -48,18 +53,91 @@ public class TextPrinter {
         else System.out.printf("%s missed shot%n", team.getName());
     }
 
-    public static void printHalftime(Team teamOne, Team teamTwo) throws InterruptedException {
-        System.out.println("Half-time!");
+    public static void printSingleEvent(SingleTeamEvent event) throws InterruptedException, IncorrectEventTypeException {
+        try {
+            if (event.getVar()) {
+                System.out.println("[VAR] Investigating incident");
+                Thread.sleep(2000);
+                printDots(5);
+            }
+        }
+        catch (NullPointerException ex) {
+            System.out.println("Event incorrect variables!");
+            Thread.sleep(500);
+            System.exit(1);
+        }
+        switch (event.getType()) {
+            case PENALTY -> {
+                System.out.printf("%s got a penalty kick!%n", event.getAffectedTeam().getName());
+                Thread.sleep(2000);
+                printDots(3);
+            }
+            case YELLOW_CARD -> {
+                System.out.printf("%s got a yellow card!%n", event.getAffectedTeam().getName());
+                Thread.sleep(1000);
+            }
+            case RED_CARD -> {
+                System.out.printf("%s got a red card!%n", event.getAffectedTeam().getName());
+                Thread.sleep(1000);
+            }
+            case VAR_GOAL -> {
+                if (!event.getVar()) {
+                    System.out.println("[GLT] Investigating validity");
+                    Thread.sleep(2000);
+                    printDots(5);
+                }
+            }
+            case INJURY -> {
+                System.out.printf("%s got an injured player!%n", event.getAffectedTeam().getName());
+                Thread.sleep(2000);
+                System.out.println("Player is being taken care of");
+                printDots(5);
+            }
+            case NOT_FOUL -> {
+                if (!event.getVar()) {
+                    System.out.println("[REF] Investigating foul");
+                    Thread.sleep(2000);
+                    printDots(5);
+                }
+                System.out.printf("%s did not commit a foul! %n", event.getAffectedTeam().getName());
+            }
+            default -> throw new IncorrectEventTypeException("Incorrect event type!");
+        }
+        Thread.sleep(1000);
+    }
+
+    public static void printDuoEvent(TwoTeamEvent event) throws InterruptedException, IncorrectEventTypeException {
+        switch (event.getType()) {
+            case OBSTRUCTION -> {
+                //TODO
+            }
+            case INVADER -> {
+                //TODO
+            }
+            default -> throw new IncorrectEventTypeException("Incorrect event type!");
+        }
+    }
+
+    private static void printDots(int num) throws InterruptedException {
+        for (int i = 1; i <= num; i++) {
+            IntStream.range(0, i).forEach(j -> System.out.print("."));
+            System.out.println();
+            Thread.sleep(500);
+        }
+    }
+
+    public static void printHalftime(Team teamOne, Team teamTwo, String halftimeMessage) throws InterruptedException {
+        System.out.println(halftimeMessage);
         printGoalStats(teamOne, teamTwo);
-        Thread.sleep(3000);
+        Thread.sleep(2000);
     }
 
     public static void printWinner(Team winner) {
         if (winner == null) System.out.println("The match is a tie! Congratulations to both teams.");
-        else System.out.printf("%s won the match! Congratulations!", winner.getName());
+        else System.out.printf("%s won the match! Congratulations!\n", winner.getName());
     }
 
-    public static void printGoalStats(Team leftTeam, Team rightTeam) throws InterruptedException {
+    public static void printGoalStats(Team leftTeam, Team rightTeam) {
         System.out.println("-----");
         System.out.println("Match statistics:");
         System.out.printf("%s - %s Goals: %s - %s Shots: %s - %s Accuracy: %s%% - %s%%%n",
@@ -68,7 +146,6 @@ public class TextPrinter {
                 leftTeam.getShots(), rightTeam.getShots(),
                 String.format("%.2f", leftTeam.getAccuracy()),
                 String.format("%.2f", rightTeam.getAccuracy()));
-        Thread.sleep(3000);
     }
 
 }

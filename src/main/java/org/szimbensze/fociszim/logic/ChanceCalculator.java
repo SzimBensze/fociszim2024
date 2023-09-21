@@ -24,4 +24,5 @@ public class ChanceCalculator {
         if (selected.getBaseChance() - opponent.getBaseChance() > 150) resultChance += 0.015F;
         return resultChance;
     }
+
 }
