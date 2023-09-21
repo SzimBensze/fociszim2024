@@ -66,8 +66,8 @@ public class TextPrinter {
                 leftTeam.getName(), rightTeam.getName(),
                 leftTeam.getGoals(), rightTeam.getGoals(),
                 leftTeam.getShots(), rightTeam.getShots(),
-                Math.round(leftTeam.getAccuracy()),
-                Math.round(rightTeam.getAccuracy()));
+                String.format("%.2f", leftTeam.getAccuracy()),
+                String.format("%.2f", rightTeam.getAccuracy()));
         Thread.sleep(3000);
     }
 
