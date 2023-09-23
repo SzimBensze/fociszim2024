@@ -38,8 +38,12 @@ public class TextPrinter {
         Thread.sleep(700);
     }
 
-    public static void printRound(Integer minute) {
+    public static void printMinute(Integer minute) {
         System.out.printf("Minute: %s'%n", minute);
+    }
+
+    public static void printMinute(Integer minute, Integer addedMinute) {
+        System.out.printf("Minute: %s + %s'%n", minute, addedMinute);
     }
 
     public static void printInterrupted() throws InterruptedException {
@@ -56,7 +60,7 @@ public class TextPrinter {
     public static void printSingleEvent(SingleTeamEvent event) throws InterruptedException, IncorrectEventTypeException {
         try {
             if (event.getVar()) {
-                System.out.println("[VAR] Investigating incident");
+                System.out.printf("[VAR] %s Investigating incident%n", event.getAffectedTeam().getName());
                 Thread.sleep(2000);
                 printDots(5);
             }
@@ -82,7 +86,7 @@ public class TextPrinter {
             }
             case VAR_GOAL -> {
                 if (!event.getVar()) {
-                    System.out.println("[GLT] Investigating validity");
+                    System.out.printf("[GLT] %s Investigating validity%n", event.getAffectedTeam().getName());
                     Thread.sleep(2000);
                     printDots(5);
                 }
@@ -109,13 +113,20 @@ public class TextPrinter {
     public static void printDuoEvent(TwoTeamEvent event) throws InterruptedException, IncorrectEventTypeException {
         switch (event.getType()) {
             case OBSTRUCTION -> {
-                //TODO
+                System.out.println("An object fell onto the field!");
+                Thread.sleep(1500);
+                System.out.println("The staff is cleaning up the pitch");
+                printDots(3);
             }
             case INVADER -> {
-                //TODO
+                System.out.println("A fan ran onto the field!");
+                Thread.sleep(1500);
+                System.out.println("The security guards are being deployed");
+                printDots(3);
             }
             default -> throw new IncorrectEventTypeException("Incorrect event type!");
         }
+        Thread.sleep(1000);
     }
 
     private static void printDots(int num) throws InterruptedException {

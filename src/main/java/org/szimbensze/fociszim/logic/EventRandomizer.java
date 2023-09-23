@@ -10,9 +10,9 @@ import java.util.*;
 
 public class EventRandomizer {
 
-    Random random = new Random();
+    private static final Random random = new Random();
 
-    public Map<Integer, FootballEvent> createEvents(Integer minMinute, Integer maxMinute, Integer amount, ArrayList<Team> teams) {
+    public static Map<Integer, FootballEvent> createEvents(Integer minMinute, Integer maxMinute, Integer amount, ArrayList<Team> teams) {
         Map<Integer, FootballEvent> randomEvents = new HashMap<>();
         for (int i = 0; i < random.nextInt(amount); i++) {
             EventType chosenEvent = EventType.values()[random.nextInt(EventType.values().length)];

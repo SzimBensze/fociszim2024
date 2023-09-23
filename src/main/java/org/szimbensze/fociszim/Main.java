@@ -33,6 +33,8 @@ public class Main {
             TextPrinter.printWinner(extraTime.getWinner());
         }
         else TextPrinter.printWinner(baseMatch.getWinner());
+
+        TextPrinter.printDivider();
         //Thread.sleep(Long.MAX_VALUE);
     }
 

@@ -1,9 +1,7 @@
 package org.szimbensze.fociszim.logic.matches;
 
 import org.szimbensze.fociszim.logic.EventRandomizer;
-import org.szimbensze.fociszim.model.events.FootballEvent;
-import org.szimbensze.fociszim.model.events.IncorrectEventTypeException;
-import org.szimbensze.fociszim.model.events.SingleTeamEvent;
+import org.szimbensze.fociszim.model.events.*;
 import org.szimbensze.fociszim.model.team_elements.Team;
 import org.szimbensze.fociszim.visual.TextPrinter;
 
@@ -21,7 +19,6 @@ public abstract class Match {
     Integer halfTime;
     Integer currentMinute;
     Float chanceMultiplier;
-    EventRandomizer eventRandom = new EventRandomizer();
     Random random = new Random();
     Integer maxEventAmount;
     Map<Integer, FootballEvent> events;
@@ -84,7 +81,7 @@ public abstract class Match {
     }
 
     public void initiateMatch(Float defaultChanceMultiplier) throws InterruptedException {
-        events = eventRandom.createEvents(firstMinute, lastMinute, maxEventAmount, new ArrayList<>(Arrays.asList(teamOne, teamTwo)));
+        events = EventRandomizer.createEvents(firstMinute, lastMinute, maxEventAmount, new ArrayList<>(Arrays.asList(teamOne, teamTwo)));
         currentMinute = firstMinute;
         chanceMultiplier = defaultChanceMultiplier;
         try {
@@ -95,25 +92,43 @@ public abstract class Match {
     }
 
     private void playMatch() throws InterruptedException {
-        while (currentMinute < lastMinute) {
-            TextPrinter.printRound(currentMinute);
-            if (checkShot(teamOne, chanceMultiplier)) {
-                TextPrinter.printShot(teamOne, shoot(teamOne, teamTwo, chanceMultiplier));
+        while (currentMinute <= lastMinute) {
+            TextPrinter.printMinute(currentMinute);
+            playMinute(false);
+            if (currentMinute.equals(halfTime)) {
+                playStoppageTime(random.nextInt(5));
+                doHalftime();
             }
-            if (checkShot(teamTwo, chanceMultiplier)) {
-                TextPrinter.printShot(teamTwo, shoot(teamTwo, teamOne, chanceMultiplier));
-            }
-            checkEvent();
-
-            teamOne.setMinuteChance(teamOne.getMinuteChance() + teamOne.getMinuteChanceModifier() - (teamTwo.getAtk() + teamTwo.getMid() + teamTwo.getDef()) / 100000F);
-            teamTwo.setMinuteChance(teamTwo.getMinuteChance() + teamTwo.getMinuteChanceModifier() - (teamOne.getAtk() + teamOne.getMid() + teamOne.getDef()) / 100000F);
-            if (teamOne.getMinuteChance() < 0) teamOne.setMinuteChance(0.0001F);
-            if (teamTwo.getMinuteChance() < 0) teamTwo.setMinuteChance(0.0001F);
-            if (currentMinute.equals(halfTime)) doHalftime();
             currentMinute++;
             Thread.sleep(500);
         }
         TextPrinter.printGoalStats(teamOne, teamTwo);
+    }
+
+    private void playStoppageTime(Integer addedMinutes) throws InterruptedException {
+        for (int i = 1; i <= addedMinutes; i++) {
+            TextPrinter.printMinute(currentMinute, i);
+            playMinute(true);
+            Thread.sleep(500);
+        }
+    }
+
+    private void playMinute(boolean isStoppageTime) throws InterruptedException {
+        Float currentChanceMultiplier;
+        if (isStoppageTime) currentChanceMultiplier = chanceMultiplier * 1.25F;
+        else currentChanceMultiplier = chanceMultiplier;
+        if (checkShot(teamOne, currentChanceMultiplier)) {
+            TextPrinter.printShot(teamOne, shoot(teamOne, teamTwo, currentChanceMultiplier));
+        }
+        if (checkShot(teamTwo, currentChanceMultiplier)) {
+            TextPrinter.printShot(teamTwo, shoot(teamTwo, teamOne, currentChanceMultiplier));
+        }
+        checkEvent();
+
+        teamOne.setMinuteChance(teamOne.getMinuteChance() + teamOne.getMinuteChanceModifier() - (teamTwo.getAtk() + teamTwo.getMid() + teamTwo.getDef()) / 100000F);
+        teamTwo.setMinuteChance(teamTwo.getMinuteChance() + teamTwo.getMinuteChanceModifier() - (teamOne.getAtk() + teamOne.getMid() + teamOne.getDef()) / 100000F);
+        if (teamOne.getMinuteChance() < 0) teamOne.setMinuteChance(0.0001F);
+        if (teamTwo.getMinuteChance() < 0) teamTwo.setMinuteChance(0.0001F);
     }
 
     private boolean checkShot(Team currentTeam, Float chanceMultiplier) {
@@ -175,6 +190,11 @@ public abstract class Match {
                             ((SingleTeamEvent) event).getAffectedTeam().getMinuteChance()
                                     + event.getType().chanceModifier * 2);
                 }
+            }
+        } else if (event instanceof TwoTeamEvent) {
+            TextPrinter.printDuoEvent((TwoTeamEvent) event);
+            for (Team affected : ((TwoTeamEvent) event).getAffectedTeams()) {
+                affected.setMinuteChance(affected.getMinuteChance() + event.getType().chanceModifier);
             }
         }
     }

@@ -10,7 +10,7 @@ public class Match90 extends Match {
     public Match90(Team team1, Team team2) {
         super(team1, team2);
         setFirstMinute(1);
-        setLastMinute(91);
+        setLastMinute(90);
         setHalfTime(45);
         setMaxEventAmount(4);
     }
