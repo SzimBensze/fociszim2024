@@ -174,6 +174,7 @@ public abstract class Match {
                 case PENALTY -> {
                     Team penaltyTaker = ((SingleTeamEvent) event).getAffectedTeam();
                     TextPrinter.printShot(penaltyTaker, shootPenalty(penaltyTaker, 1000F));
+                    Thread.sleep(500);
                 }
                 case VAR_GOAL -> {
                     Team givenTeam = ((SingleTeamEvent) event).getAffectedTeam();

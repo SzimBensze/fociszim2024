@@ -1,5 +1,6 @@
 package org.szimbensze.fociszim.visual;
 
+import org.szimbensze.fociszim.model.events.EventType;
 import org.szimbensze.fociszim.model.events.IncorrectEventTypeException;
 import org.szimbensze.fociszim.model.events.SingleTeamEvent;
 import org.szimbensze.fociszim.model.events.TwoTeamEvent;
@@ -7,6 +8,7 @@ import org.szimbensze.fociszim.model.team_elements.Home;
 import org.szimbensze.fociszim.model.team_elements.Team;
 import org.szimbensze.fociszim.model.team_elements.Visitor;
 
+import java.util.Random;
 import java.util.stream.IntStream;
 
 public class TextPrinter {
@@ -58,6 +60,10 @@ public class TextPrinter {
     }
 
     public static void printSingleEvent(SingleTeamEvent event) throws InterruptedException, IncorrectEventTypeException {
+        if (event.getType().equals(EventType.GOAL_DENIED)) {
+            printShot(event.getAffectedTeam(), true);
+            Thread.sleep(1000);
+        }
         try {
             if (event.getVar()) {
                 System.out.printf("[VAR] %s Investigating incident%n", event.getAffectedTeam().getName());
@@ -89,6 +95,19 @@ public class TextPrinter {
                     System.out.printf("[GLT] %s Investigating validity%n", event.getAffectedTeam().getName());
                     Thread.sleep(2000);
                     printDots(5);
+                }
+            }
+            case GOAL_DENIED -> {
+                if (!event.getVar()) {
+                    System.out.printf("[GLT] %s Investigating validity%n", event.getAffectedTeam().getName());
+                    Thread.sleep(2000);
+                    printDots(5);
+                    System.out.printf("%s's shot is not over the line!%n", event.getAffectedTeam().getName());
+                }
+                else {
+                    Random randomInvalidity = new Random();
+                    String[] foulTexts = {"is offside", "committed a foul", "handball", "not a goal"};
+                    System.out.printf("%s %s! Goal denied!%n", event.getAffectedTeam().getName(), foulTexts[randomInvalidity.nextInt(foulTexts.length)]);
                 }
             }
             case INJURY -> {
