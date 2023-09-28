@@ -4,8 +4,8 @@ public enum EventType {
 
     PENALTY(0F, false, true),
     YELLOW_CARD(-0.002F, false, true),
-    RED_CARD(-0.018F, false, true),
-    VAR_GOAL(0F, false, true),
+    RED_CARD(-0.022F, false, true),
+    VAR_GOAL(-0.002F, false, true),
     GOAL_DENIED(-0.001F, false, true),
     INJURY(-0.01F, false, false),
     OBSTRUCTION(-0.001F, true, false),

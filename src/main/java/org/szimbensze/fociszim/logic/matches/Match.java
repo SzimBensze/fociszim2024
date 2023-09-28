@@ -179,18 +179,17 @@ public abstract class Match {
         if (event instanceof SingleTeamEvent) {
             TextPrinter.printSingleEvent((SingleTeamEvent) event);
             switch (event.getType()) {
-                case PENALTY -> {
+                case PENALTY :
                     Team penaltyTaker = ((SingleTeamEvent) event).getAffectedTeam();
                     TextPrinter.printShot(penaltyTaker, shootPenalty(penaltyTaker, 1000F));
                     Thread.sleep(500);
-                }
-                case VAR_GOAL -> {
+                    break;
+                case VAR_GOAL :
                     Team givenTeam = ((SingleTeamEvent) event).getAffectedTeam();
                     givenTeam.setShots(givenTeam.getShots() + 1);
                     givenTeam.setGoals(givenTeam.getGoals() + 1);
                     TextPrinter.printShot(givenTeam, true);
-                }
-                default -> {
+                default :
                     if (((SingleTeamEvent) event).getVar())
                         ((SingleTeamEvent) event).getAffectedTeam().setMinuteChance(
                             ((SingleTeamEvent) event).getAffectedTeam().getMinuteChance()
@@ -198,7 +197,6 @@ public abstract class Match {
                     else ((SingleTeamEvent) event).getAffectedTeam().setMinuteChance(
                             ((SingleTeamEvent) event).getAffectedTeam().getMinuteChance()
                                     + event.getType().chanceModifier * 2);
-                }
             }
         } else if (event instanceof TwoTeamEvent) {
             TextPrinter.printDuoEvent((TwoTeamEvent) event);
