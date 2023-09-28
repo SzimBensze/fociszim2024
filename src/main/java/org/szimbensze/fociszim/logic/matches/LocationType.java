@@ -1,2 +1,6 @@
-package org.szimbensze.fociszim.logic.matches;public enum LocationType {
+package org.szimbensze.fociszim.logic.matches;
+
+public enum LocationType {
+    HOME_STADIUM,
+    OUTSIDE
 }

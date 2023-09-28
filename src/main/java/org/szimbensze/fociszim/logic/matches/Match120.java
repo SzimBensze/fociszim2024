@@ -1,12 +1,11 @@
 package org.szimbensze.fociszim.logic.matches;
 
-import org.szimbensze.fociszim.model.team_elements.Team;
 import org.szimbensze.fociszim.visual.TextPrinter;
 
 public class Match120 extends Match {
 
-    public Match120(Team team1, Team team2) {
-        super(team1, team2);
+    public Match120(Match match) {
+        super(match.getTeamOne(), match.getTeamTwo());
         setFirstMinute(91);
         setLastMinute(120);
         setHalfTime(105);

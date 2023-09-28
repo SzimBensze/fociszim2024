@@ -1,9 +1,7 @@
 package org.szimbensze.fociszim.logic;
 
 import org.szimbensze.fociszim.model.team_elements.Formations;
-import org.szimbensze.fociszim.model.team_elements.Home;
 import org.szimbensze.fociszim.model.team_elements.Team;
-import org.szimbensze.fociszim.model.team_elements.Visitor;
 import org.szimbensze.fociszim.visual.UserInput;
 
 import java.util.Random;
@@ -12,12 +10,6 @@ public class TeamCreator {
 
     UserInput userInput = new UserInput();
     Random random = new Random();
-
-    public Team createTeam(Class teamType) throws IncorrectTeamTypeException {
-        if (teamType.equals(Home.class)) return new Home();
-        else if (teamType.equals(Visitor.class)) return new Visitor();
-        else throw new IncorrectTeamTypeException("Incorrect team type specified!");
-    }
 
     public void addStats(Team selectedTeam) {
         selectedTeam.setName(userInput.inputName(selectedTeam));

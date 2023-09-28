@@ -28,6 +28,14 @@ public abstract class Match {
         this.teamTwo = team2;
     }
 
+    public Team getTeamOne() {
+        return teamOne;
+    }
+
+    public Team getTeamTwo() {
+        return teamTwo;
+    }
+
     public Integer getFirstMinute() {
         return firstMinute;
     }
