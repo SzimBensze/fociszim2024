@@ -102,7 +102,7 @@ public class TextPrinter {
                     System.out.printf("[GLT] %s Investigating validity%n", event.getAffectedTeam().getName());
                     Thread.sleep(2000);
                     printDots(5);
-                    System.out.printf("%s's shot is not over the line!%n", event.getAffectedTeam().getName());
+                    System.out.printf("%s shot is not over the line!%n", event.getAffectedTeam().getName());
                 }
                 else {
                     Random randomInvalidity = new Random();

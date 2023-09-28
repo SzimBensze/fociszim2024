@@ -27,10 +27,12 @@ public class Main {
             System.out.println(visitorTeam);
         }
         baseMatch.initiateMatch(1F);
-        if (baseMatch.getWinner() == null) if (UserInput.inputYesNo("Continue with overtime? (y/n)")) {
-            Match120 extraTime = new Match120(homeTeam, visitorTeam);
-            extraTime.initiateMatch(1.05F);
-            TextPrinter.printWinner(extraTime.getWinner());
+        if (baseMatch.getWinner() == null) {
+            if (UserInput.inputYesNo("Continue with overtime? (y/n)")) {
+                Match120 extraTime = new Match120(homeTeam, visitorTeam);
+                extraTime.initiateMatch(1.05F);
+                TextPrinter.printWinner(extraTime.getWinner());
+            }
         }
         else TextPrinter.printWinner(baseMatch.getWinner());
 

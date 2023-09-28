@@ -123,7 +123,7 @@ public abstract class Match {
         if (checkShot(teamTwo, currentChanceMultiplier)) {
             TextPrinter.printShot(teamTwo, shoot(teamTwo, teamOne, currentChanceMultiplier));
         }
-        checkEvent();
+        if (!isStoppageTime) checkEvent();
 
         teamOne.setMinuteChance(teamOne.getMinuteChance() + teamOne.getMinuteChanceModifier() - (teamTwo.getAtk() + teamTwo.getMid() + teamTwo.getDef()) / 100000F);
         teamTwo.setMinuteChance(teamTwo.getMinuteChance() + teamTwo.getMinuteChanceModifier() - (teamOne.getAtk() + teamOne.getMid() + teamOne.getDef()) / 100000F);
