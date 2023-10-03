@@ -19,4 +19,8 @@ public class MatchBuilder {
         return new Match120(previousMatch);
     }
 
+    public static PenaltyShootout createPenaltyShootout(Match previousMatch) {
+        return new PenaltyShootout(previousMatch);
+    }
+
 }

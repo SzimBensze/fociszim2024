@@ -21,7 +21,14 @@ public class Main {
             if (UserInput.inputYesNo("Continue with overtime? (y/n)")) {
                 Match120 extraTime = MatchBuilder.createExtraMatch(baseMatch);
                 extraTime.initiateMatch(1.05F);
-                TextPrinter.printWinner(extraTime.getWinner());
+                if (extraTime.getWinner() == null) {
+                    if (UserInput.inputYesNo("Continue with penalties? (y/n)")) {
+                        PenaltyShootout penalties = MatchBuilder.createPenaltyShootout(extraTime);
+                        penalties.initiateMatch(1F);
+                        TextPrinter.printWinner(penalties.getWinner());
+                    }
+                    else TextPrinter.printWinner(extraTime.getWinner());
+                }
             }
         }
         else TextPrinter.printWinner(baseMatch.getWinner());

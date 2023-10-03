@@ -99,7 +99,7 @@ public abstract class Match {
         }
     }
 
-    private void playMatch() throws InterruptedException {
+    protected void playMatch() throws InterruptedException {
         while (currentMinute <= lastMinute) {
             TextPrinter.printMinute(currentMinute);
             playMinute(false);
@@ -156,7 +156,7 @@ public abstract class Match {
         return successfulShot;
     }
 
-    private boolean shootPenalty(Team currentTeam, Float hitMaxValue) {
+    protected boolean shootPenalty(Team currentTeam, Float hitMaxValue) {
         currentTeam.setShots(currentTeam.getShots() + 1);
         boolean successfulShot = random.nextFloat(hitMaxValue) < currentTeam.getBaseChance();
         if (successfulShot) currentTeam.setGoals(currentTeam.getGoals() + 1);
