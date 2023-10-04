@@ -182,16 +182,16 @@ public class TextPrinter {
         System.out.printf("Coin flip: %s - HEADS, %s - TAILS%nThe coin landed on %s%n", leftTeam.getName(), rightTeam.getName(), coinValue ? "HEADS" : "TAILS");
     }
 
-    public static void printPenaltyShootout(Team currentTeam, int number, boolean shot) throws InterruptedException {
+    public static void printPenaltyShootout(Team currentTeam, int number, boolean shot) {
         System.out.printf("%s No.%s shot:%n", currentTeam.getName(), number);
-        Thread.sleep(500);
         printShot(currentTeam, shot);
     }
 
     public static void printPenaltyResults(Team leftTeam, Team rightTeam, String leftShots, String rightShots) {
         System.out.println("-----");
-        System.out.printf("%s shots: %s%n", leftTeam.getName(), leftShots);
-        System.out.printf("%s shots: %s%n", rightTeam.getName(), rightShots);
+        System.out.printf("%s pen shots: %s%n", leftTeam.getName(), leftShots);
+        System.out.printf("%s pen shots: %s%n", rightTeam.getName(), rightShots);
+        if (leftTeam.getGoals().equals(rightTeam.getGoals())) System.out.println("Not decided yet!");
     }
 
 }

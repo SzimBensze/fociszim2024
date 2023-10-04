@@ -36,25 +36,33 @@ public class PenaltyShootout extends Match {
         TextPrinter.printCoin(teamOne, teamTwo, headsOrTails);
         Thread.sleep(2000);
 
-        List<Team> teamOrder = headsOrTails ? Arrays.asList(teamOne, teamTwo) : Arrays.asList(teamTwo, teamOne);
-        for (int i = 1; i <= 5; i++) {
-            for (Team penaltyTaker : teamOrder) {
-                boolean shot = shootPenalty(penaltyTaker, 900F);
-                penalties.replace(penaltyTaker, penalties.get(penaltyTaker) + (shot ? "✓" : "✗"));
-                TextPrinter.printPenaltyShootout(penaltyTaker, i, shot);
-                Thread.sleep(1000);
-            }
-        }
+        List<Team> teamsInOrder = headsOrTails ? Arrays.asList(teamOne, teamTwo) : Arrays.asList(teamTwo, teamOne);
+        cyclePenalty(teamsInOrder, 5);
+
         TextPrinter.printGoalStats(teamOne, teamTwo);
-        TextPrinter.printPenaltyResults(teamOne, teamTwo, penalties.get(teamOne), penalties.get(teamTwo));
         doHalftime();
+        if (getWinner() == null) cyclePenalty(teamsInOrder, -1);
     }
 
     @Override
     protected void doHalftime() throws InterruptedException {
-        if (getWinner() == null) {
-            System.out.println("WIP");
-            //TODO penalties until winner announced
+        TextPrinter.printPenaltyResults(teamOne, teamTwo, penalties.get(teamOne), penalties.get(teamTwo));
+        Thread.sleep(2000);
+    }
+
+    private void cyclePenalty(List<Team> teamOrder, int penaltyAmount) throws InterruptedException {
+        int penNum = 1;
+        while (getWinner() == null || penNum <= penaltyAmount) {
+            for (Team penaltyTaker : teamOrder) {
+                boolean shot = shootPenalty(penaltyTaker, 900F);
+                penalties.replace(penaltyTaker, penalties.get(penaltyTaker) + (shot ? "✓" : "✗"));
+                TextPrinter.printPenaltyShootout(penaltyTaker, penNum, shot);
+                Thread.sleep(500);
+            }
+        penNum++;
+        if (penNum > penaltyAmount && penaltyAmount != -1) break;
+        Thread.sleep(1000);
         }
     }
+
 }
