@@ -12,6 +12,8 @@ public class Match90 extends Match {
         setFirstMinute(1);
         setLastMinute(90);
         setHalfTime(45);
+        setFirstHalfMaxStoppageTime(6);
+        setSecHalfMaxStoppageTime(7);
         setMaxEventAmount(4);
     }
 

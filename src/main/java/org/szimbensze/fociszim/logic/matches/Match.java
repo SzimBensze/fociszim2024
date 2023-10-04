@@ -18,6 +18,8 @@ public abstract class Match {
     Integer lastMinute;
     Integer halfTime;
     Integer currentMinute;
+    Integer firstHalfMaxStoppageTime;
+    Integer secHalfMaxStoppageTime;
     Float chanceMultiplier;
     Random random = new Random();
     Integer maxEventAmount;
@@ -64,6 +66,22 @@ public abstract class Match {
         return currentMinute;
     }
 
+    public Integer getFirstHalfMaxStoppageTime() {
+        return firstHalfMaxStoppageTime;
+    }
+
+    public void setFirstHalfMaxStoppageTime(Integer firstHalfMaxStoppageTime) {
+        this.firstHalfMaxStoppageTime = firstHalfMaxStoppageTime;
+    }
+
+    public Integer getSecHalfMaxStoppageTime() {
+        return secHalfMaxStoppageTime;
+    }
+
+    public void setSecHalfMaxStoppageTime(Integer secHalfMaxStoppageTime) {
+        this.secHalfMaxStoppageTime = secHalfMaxStoppageTime;
+    }
+
     public Float getChanceMultiplier() {
         return chanceMultiplier;
     }
@@ -104,9 +122,9 @@ public abstract class Match {
             TextPrinter.printMinute(currentMinute);
             playMinute(false);
             if (currentMinute.equals(halfTime)) {
-                playStoppageTime(random.nextInt(5));
+                playStoppageTime(random.nextInt(firstHalfMaxStoppageTime));
                 doHalftime();
-            }
+            } else if (currentMinute.equals(lastMinute)) playStoppageTime(random.nextInt(secHalfMaxStoppageTime));
             currentMinute++;
             Thread.sleep(500);
         }
