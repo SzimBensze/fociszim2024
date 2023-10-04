@@ -25,13 +25,11 @@ public class Main {
                     if (UserInput.inputYesNo("Continue with penalties? (y/n)")) {
                         PenaltyShootout penalties = MatchBuilder.createPenaltyShootout(extraTime);
                         penalties.initiateMatch(1F);
-                        TextPrinter.printWinner(penalties.getWinner());
                     }
-                    else TextPrinter.printWinner(extraTime.getWinner());
                 }
             }
         }
-        else TextPrinter.printWinner(baseMatch.getWinner());
+        TextPrinter.printWinner(baseMatch.getWinner());
 
         TextPrinter.printDivider();
         //Thread.sleep(Long.MAX_VALUE);

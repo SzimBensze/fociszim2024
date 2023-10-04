@@ -15,6 +15,13 @@ public class Match120 extends Match {
     }
 
     @Override
+    public void initiateMatch(Float defaultChanceMultiplier) throws InterruptedException {
+        TextPrinter.printDivider();
+        Thread.sleep(1000);
+        super.initiateMatch(defaultChanceMultiplier);
+    }
+
+    @Override
     protected void doHalftime() throws InterruptedException {
         if (teamOne.getShots() < 7 && teamOne.getGoals() == 0) teamOne.setMinuteChance(teamOne.getMinuteChance() + teamOne.getMinuteChanceModifier() * 3F);
         if (teamTwo.getShots() < 7 && teamTwo.getGoals() == 0) teamTwo.setMinuteChance(teamTwo.getMinuteChance() + teamTwo.getMinuteChanceModifier() * 3F);

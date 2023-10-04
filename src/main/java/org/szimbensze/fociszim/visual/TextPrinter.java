@@ -188,4 +188,10 @@ public class TextPrinter {
         printShot(currentTeam, shot);
     }
 
+    public static void printPenaltyResults(Team leftTeam, Team rightTeam, String leftShots, String rightShots) {
+        System.out.println("-----");
+        System.out.printf("%s shots: %s%n", leftTeam.getName(), leftShots);
+        System.out.printf("%s shots: %s%n", rightTeam.getName(), rightShots);
+    }
+
 }
