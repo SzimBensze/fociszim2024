@@ -1,6 +1,7 @@
 package org.szimbensze.fociszim.logic.matches;
 
 import org.szimbensze.fociszim.logic.ChanceCalculator;
+import org.szimbensze.fociszim.logic.ElementRandomizer;
 import org.szimbensze.fociszim.logic.TeamCreator;
 import org.szimbensze.fociszim.model.team_elements.Team;
 import org.szimbensze.fociszim.visual.TextPrinter;
@@ -12,8 +13,20 @@ public class Match90 extends Match {
         setFirstMinute(1);
         setLastMinute(90);
         setHalfTime(45);
-        setFirstHalfMaxStoppageTime(6);
-        setSecHalfMaxStoppageTime(7);
+        firstHalfStoppageMinutes.add(10, 0);
+        firstHalfStoppageMinutes.add(19, 1);
+        firstHalfStoppageMinutes.add(25, 2);
+        firstHalfStoppageMinutes.add(30, 3);
+        firstHalfStoppageMinutes.add(11, 4);
+        firstHalfStoppageMinutes.add(5, 5);
+        secHalfStoppageMinutes.add(5, 0);
+        secHalfStoppageMinutes.add(10, 1);
+        secHalfStoppageMinutes.add(19, 2);
+        secHalfStoppageMinutes.add(27, 3);
+        secHalfStoppageMinutes.add(21, 4);
+        secHalfStoppageMinutes.add(12, 5);
+        secHalfStoppageMinutes.add(6, 6);
+        setSecHalfStoppageMinutes(secHalfStoppageMinutes);
         setMaxEventAmount(4);
     }
 

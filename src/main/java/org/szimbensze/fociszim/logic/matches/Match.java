@@ -1,14 +1,12 @@
 package org.szimbensze.fociszim.logic.matches;
 
+import org.szimbensze.fociszim.logic.ElementRandomizer;
 import org.szimbensze.fociszim.logic.EventRandomizer;
 import org.szimbensze.fociszim.model.events.*;
 import org.szimbensze.fociszim.model.team_elements.Team;
 import org.szimbensze.fociszim.visual.TextPrinter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public abstract class Match {
 
@@ -18,8 +16,8 @@ public abstract class Match {
     Integer lastMinute;
     Integer halfTime;
     Integer currentMinute;
-    Integer firstHalfMaxStoppageTime;
-    Integer secHalfMaxStoppageTime;
+    ElementRandomizer<Integer> firstHalfStoppageMinutes = new ElementRandomizer<>();
+    ElementRandomizer<Integer> secHalfStoppageMinutes = new ElementRandomizer<>();
     Float chanceMultiplier;
     Random random = new Random();
     Integer maxEventAmount;
@@ -66,20 +64,20 @@ public abstract class Match {
         return currentMinute;
     }
 
-    public Integer getFirstHalfMaxStoppageTime() {
-        return firstHalfMaxStoppageTime;
+    public ElementRandomizer<Integer> getFirstHalfStoppageMinutes() {
+        return firstHalfStoppageMinutes;
     }
 
-    public void setFirstHalfMaxStoppageTime(Integer firstHalfMaxStoppageTime) {
-        this.firstHalfMaxStoppageTime = firstHalfMaxStoppageTime;
+    public void setFirstHalfStoppageMinutes(ElementRandomizer<Integer> firstHalfStoppageMinutes) {
+        this.firstHalfStoppageMinutes = firstHalfStoppageMinutes;
     }
 
-    public Integer getSecHalfMaxStoppageTime() {
-        return secHalfMaxStoppageTime;
+    public ElementRandomizer<Integer> getSecHalfStoppageMinutes() {
+        return secHalfStoppageMinutes;
     }
 
-    public void setSecHalfMaxStoppageTime(Integer secHalfMaxStoppageTime) {
-        this.secHalfMaxStoppageTime = secHalfMaxStoppageTime;
+    public void setSecHalfStoppageMinutes(ElementRandomizer<Integer> secHalfStoppageMinutes) {
+        this.secHalfStoppageMinutes = secHalfStoppageMinutes;
     }
 
     public Float getChanceMultiplier() {
@@ -122,21 +120,13 @@ public abstract class Match {
             TextPrinter.printMinute(currentMinute);
             playMinute(false);
             if (currentMinute.equals(halfTime)) {
-                playStoppageTime(random.nextInt(firstHalfMaxStoppageTime));
+                playStoppageTime(firstHalfStoppageMinutes.next());
                 doHalftime();
-            } else if (currentMinute.equals(lastMinute)) playStoppageTime(random.nextInt(secHalfMaxStoppageTime));
+            } else if (currentMinute.equals(lastMinute)) playStoppageTime(secHalfStoppageMinutes.next());
             currentMinute++;
             Thread.sleep(500);
         }
         TextPrinter.printGoalStats(teamOne, teamTwo);
-    }
-
-    private void playStoppageTime(Integer addedMinutes) throws InterruptedException {
-        for (int i = 1; i <= addedMinutes; i++) {
-            TextPrinter.printMinute(currentMinute, i);
-            playMinute(true);
-            Thread.sleep(500);
-        }
     }
 
     private void playMinute(boolean isStoppageTime) throws InterruptedException {
@@ -155,6 +145,14 @@ public abstract class Match {
         teamTwo.setMinuteChance(teamTwo.getMinuteChance() + teamTwo.getMinuteChanceModifier() - (teamOne.getAtk() + teamOne.getMid() + teamOne.getDef()) / 100000F);
         if (teamOne.getMinuteChance() < 0) teamOne.setMinuteChance(0.0001F);
         if (teamTwo.getMinuteChance() < 0) teamTwo.setMinuteChance(0.0001F);
+    }
+
+    private void playStoppageTime(Integer addedMinutes) throws InterruptedException {
+        for (int i = 1; i <= addedMinutes; i++) {
+            TextPrinter.printMinute(currentMinute, i);
+            playMinute(true);
+            Thread.sleep(500);
+        }
     }
 
     private boolean checkShot(Team currentTeam, Float chanceMultiplier) {
@@ -218,9 +216,8 @@ public abstract class Match {
             }
         } else if (event instanceof TwoTeamEvent) {
             TextPrinter.printDuoEvent((TwoTeamEvent) event);
-            for (Team affected : ((TwoTeamEvent) event).getAffectedTeams()) {
+            for (Team affected : ((TwoTeamEvent) event).getAffectedTeams())
                 affected.setMinuteChance(affected.getMinuteChance() + event.getType().chanceModifier);
-            }
         }
     }
 
