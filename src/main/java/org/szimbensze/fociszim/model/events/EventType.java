@@ -10,7 +10,7 @@ public enum EventType {
     INJURY(-0.01F, false, false),
     OBSTRUCTION(-0.001F, true, false),
     INVADER(0.001F, true, false),
-    NOT_FOUL(0.002F, false, false);
+    NOT_FOUL(0.002F, false, true);
 
     public final Float chanceModifier;
     public final boolean affectBothTeams;

@@ -114,11 +114,11 @@ public class TextPrinter {
                 System.out.printf("%s got an injured player!%n", event.getAffectedTeam().getName());
                 Thread.sleep(2000);
                 System.out.println("Player is being taken care of");
-                printDots(5);
+                printDots(3);
             }
             case NOT_FOUL -> {
                 if (!event.getVar()) {
-                    System.out.println("[REF] Investigating foul");
+                    System.out.printf("[REF] %s Investigating incident%n", event.getAffectedTeam().getName());
                     Thread.sleep(2000);
                     printDots(5);
                 }
