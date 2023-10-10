@@ -22,10 +22,10 @@ public class Match90 extends Match {
         secHalfStoppageMinutes.add(5, 0);
         secHalfStoppageMinutes.add(10, 1);
         secHalfStoppageMinutes.add(19, 2);
-        secHalfStoppageMinutes.add(27, 3);
+        secHalfStoppageMinutes.add(28, 3);
         secHalfStoppageMinutes.add(21, 4);
         secHalfStoppageMinutes.add(12, 5);
-        secHalfStoppageMinutes.add(6, 6);
+        secHalfStoppageMinutes.add(5, 6);
         setSecHalfStoppageMinutes(secHalfStoppageMinutes);
         setMaxEventAmount(4);
     }

@@ -12,10 +12,10 @@ public class Match120 extends Match {
         setHalfTime(105);
         firstHalfStoppageMinutes.add(20, 0);
         firstHalfStoppageMinutes.add(30, 1);
-        firstHalfStoppageMinutes.add(35, 2);
-        firstHalfStoppageMinutes.add(15, 3);
-        secHalfStoppageMinutes.add(14, 0);
-        secHalfStoppageMinutes.add(24, 1);
+        firstHalfStoppageMinutes.add(36, 2);
+        firstHalfStoppageMinutes.add(14, 3);
+        secHalfStoppageMinutes.add(13, 0);
+        secHalfStoppageMinutes.add(25, 1);
         secHalfStoppageMinutes.add(29, 2);
         secHalfStoppageMinutes.add(27, 3);
         secHalfStoppageMinutes.add(6, 4);

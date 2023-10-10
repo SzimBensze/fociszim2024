@@ -9,11 +9,11 @@ public class ElementRandomizer<E> {
     private final NavigableMap<Double, E> map = new TreeMap<>();
     private double total = 0;
 
-    public void add(double weight, E result) {
-        if (weight <= 0 || map.containsValue(result))
+    public void add(double weight, E element) {
+        if (weight <= 0 || map.containsValue(element))
             return;
         total += weight;
-        map.put(total, result);
+        map.put(total, element);
     }
 
     public E next() {
