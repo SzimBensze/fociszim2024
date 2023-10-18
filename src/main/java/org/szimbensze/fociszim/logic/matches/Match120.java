@@ -1,6 +1,5 @@
 package org.szimbensze.fociszim.logic.matches;
 
-import org.szimbensze.fociszim.logic.ElementRandomizer;
 import org.szimbensze.fociszim.visual.TextPrinter;
 
 public class Match120 extends Match {
@@ -23,10 +22,10 @@ public class Match120 extends Match {
     }
 
     @Override
-    public void initiateMatch(Float defaultChanceMultiplier) throws InterruptedException {
+    public void initiateMatch() throws InterruptedException {
         Thread.sleep(1000);
         TextPrinter.printDivider();
-        super.initiateMatch(defaultChanceMultiplier);
+        super.initiateMatch();
     }
 
     @Override

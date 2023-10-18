@@ -17,10 +17,10 @@ public class ChanceCalculator {
     }
 
     public Float CalcMinuteChance(Team selected, Team opponent) {
-        Float chanceByBase = selected.getBaseChance() + (selected.getAtk() * selected.getLuck() - opponent.getDef() +
+        float chanceByBase = selected.getBaseChance() + (selected.getAtk() * selected.getLuck() - opponent.getDef() +
                 selected.getMid() - opponent.getMid() +
                 selected.getDef() - opponent.getAtk() * opponent.getLuck()) / 3;
-        Float resultChance = chanceByBase / 10000;
+        float resultChance = chanceByBase / 10000;
         if (selected.getBaseChance() - opponent.getBaseChance() > 150) resultChance += 0.015F;
         return resultChance;
     }

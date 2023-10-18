@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TwoTeamEvent extends FootballEvent {
 
-    private List<Team> affectedTeams;
+    private final List<Team> affectedTeams;
 
     public TwoTeamEvent(EventType type, List<Team> affectedTeams) {
         super(type);

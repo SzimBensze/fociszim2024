@@ -11,7 +11,7 @@ import java.util.*;
 public class EventRandomizer {
 
     private static final Random random = new Random();
-    private static ElementRandomizer<EventType> eventsSelection = new ElementRandomizer<>();
+    private static final ElementRandomizer<EventType> eventsSelection = new ElementRandomizer<>();
 
     public static Map<Integer, FootballEvent> createEvents(Integer minMinute, Integer maxMinute, Integer amount, ArrayList<Team> teams) {
         createEventsList();

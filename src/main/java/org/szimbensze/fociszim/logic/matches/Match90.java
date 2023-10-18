@@ -31,10 +31,10 @@ public class Match90 extends Match {
     }
 
     @Override
-    public void initiateMatch(Float defaultChanceMultiplier) throws InterruptedException {
+    public void initiateMatch() throws InterruptedException {
         Thread.sleep(3000);
         TextPrinter.printInitiation();
-        super.initiateMatch(defaultChanceMultiplier);
+        super.initiateMatch();
     }
 
     @Override

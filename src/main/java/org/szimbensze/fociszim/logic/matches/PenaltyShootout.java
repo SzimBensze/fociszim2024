@@ -20,9 +20,8 @@ public class PenaltyShootout extends Match {
     }
 
     @Override
-    public void initiateMatch(Float defaultChanceMultiplier) throws InterruptedException {
+    public void initiateMatch() throws InterruptedException {
         TextPrinter.printDivider();
-        chanceMultiplier = defaultChanceMultiplier;
         try {
             playMatch();
         } catch (InterruptedException e) {

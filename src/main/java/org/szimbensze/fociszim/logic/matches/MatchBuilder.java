@@ -6,7 +6,7 @@ import org.szimbensze.fociszim.model.team_elements.Visitor;
 
 public class MatchBuilder {
 
-    public static Match90 createBaseMatch(LocationType location, boolean isStat) throws InterruptedException {
+    public static Match90 createBaseMatch(LocationType location, boolean isStat) {
         Team teamOne = location.equals(LocationType.HOME_STADIUM) ? new Home() : new Visitor();
         Team teamTwo = new Visitor();
 

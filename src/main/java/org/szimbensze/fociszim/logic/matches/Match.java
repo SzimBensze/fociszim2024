@@ -18,7 +18,6 @@ public abstract class Match {
     Integer currentMinute;
     ElementRandomizer<Integer> firstHalfStoppageMinutes = new ElementRandomizer<>();
     ElementRandomizer<Integer> secHalfStoppageMinutes = new ElementRandomizer<>();
-    Float chanceMultiplier;
     Random random = new Random();
     Integer maxEventAmount;
     Map<Integer, FootballEvent> events;
@@ -36,60 +35,20 @@ public abstract class Match {
         return teamTwo;
     }
 
-    public Integer getFirstMinute() {
-        return firstMinute;
-    }
-
     public void setFirstMinute(Integer firstMinute) {
         this.firstMinute = firstMinute;
-    }
-
-    public Integer getLastMinute() {
-        return lastMinute;
     }
 
     public void setLastMinute(Integer lastMinute) {
         this.lastMinute = lastMinute;
     }
 
-    public Integer getHalfTime() {
-        return halfTime;
-    }
-
     public void setHalfTime(Integer halfTime) {
         this.halfTime = halfTime;
     }
 
-    public Integer getCurrentMinute() {
-        return currentMinute;
-    }
-
-    public ElementRandomizer<Integer> getFirstHalfStoppageMinutes() {
-        return firstHalfStoppageMinutes;
-    }
-
-    public void setFirstHalfStoppageMinutes(ElementRandomizer<Integer> firstHalfStoppageMinutes) {
-        this.firstHalfStoppageMinutes = firstHalfStoppageMinutes;
-    }
-
-    public ElementRandomizer<Integer> getSecHalfStoppageMinutes() {
-        return secHalfStoppageMinutes;
-    }
-
     public void setSecHalfStoppageMinutes(ElementRandomizer<Integer> secHalfStoppageMinutes) {
         this.secHalfStoppageMinutes = secHalfStoppageMinutes;
-    }
-
-    public Float getChanceMultiplier() {
-        return chanceMultiplier;
-    }
-
-    public void setChanceMultiplier(Float chanceMultiplier) {
-        this.chanceMultiplier = chanceMultiplier;
-    }
-
-    public Integer getMaxEventAmount() {
-        return maxEventAmount;
     }
 
     public void setMaxEventAmount(Integer maxEventAmount) {
@@ -100,14 +59,9 @@ public abstract class Match {
         return events;
     }
 
-    public void setEvents(Map<Integer, FootballEvent> events) {
-        this.events = events;
-    }
-
-    public void initiateMatch(Float defaultChanceMultiplier) throws InterruptedException {
+    public void initiateMatch() throws InterruptedException {
         events = EventRandomizer.createEvents(firstMinute, lastMinute, maxEventAmount, new ArrayList<>(Arrays.asList(teamOne, teamTwo)));
         currentMinute = firstMinute;
-        chanceMultiplier = defaultChanceMultiplier;
         try {
             playMatch();
         } catch (InterruptedException e) {
@@ -119,25 +73,22 @@ public abstract class Match {
         while (currentMinute <= lastMinute) {
             TextPrinter.printMinute(currentMinute);
             playMinute(false);
+            Thread.sleep(500);
             if (currentMinute.equals(halfTime)) {
                 playStoppageTime(firstHalfStoppageMinutes.next());
                 doHalftime();
             } else if (currentMinute.equals(lastMinute)) playStoppageTime(secHalfStoppageMinutes.next());
             currentMinute++;
-            Thread.sleep(500);
         }
         TextPrinter.printGoalStats(teamOne, teamTwo);
     }
 
     private void playMinute(boolean isStoppageTime) throws InterruptedException {
-        Float currentChanceMultiplier;
-        if (isStoppageTime) currentChanceMultiplier = chanceMultiplier * 1.25F;
-        else currentChanceMultiplier = chanceMultiplier;
-        if (checkShot(teamOne, currentChanceMultiplier)) {
-            TextPrinter.printShot(teamOne, shoot(teamOne, teamTwo, currentChanceMultiplier));
+        if (checkShot(teamOne, teamOne.getShotChanceMultiplier())) {
+            TextPrinter.printShot(teamOne, shoot(teamOne, teamTwo, teamOne.getShotChanceMultiplier()));
         }
-        if (checkShot(teamTwo, currentChanceMultiplier)) {
-            TextPrinter.printShot(teamTwo, shoot(teamTwo, teamOne, currentChanceMultiplier));
+        if (checkShot(teamTwo, teamTwo.getShotChanceMultiplier())) {
+            TextPrinter.printShot(teamTwo, shoot(teamTwo, teamOne, teamTwo.getShotChanceMultiplier()));
         }
         if (!isStoppageTime) checkEvent();
 

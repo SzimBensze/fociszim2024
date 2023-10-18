@@ -13,8 +13,8 @@ public class UserInput {
     static Scanner sc = new Scanner(System.in);
 
     public String inputName(Team currentTeam) {
-        if (currentTeam.getClass().equals(Home.class)) System.out.printf("Type name for home team: ");
-        else if (currentTeam.getClass().equals(Visitor.class)) System.out.printf("Type name for visitor team: ");
+        if (currentTeam.getClass().equals(Home.class)) System.out.print("Type name for home team: ");
+        else if (currentTeam.getClass().equals(Visitor.class)) System.out.print("Type name for visitor team: ");
         return sc.nextLine();
     }
 
