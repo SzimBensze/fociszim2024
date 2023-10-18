@@ -40,12 +40,8 @@ public class TextPrinter {
         Thread.sleep(700);
     }
 
-    public static void printMinute(Integer minute) {
-        System.out.printf("Minute: %s'%n", minute);
-    }
-
     public static void printMinute(Integer minute, Integer addedMinute) {
-        System.out.printf("Minute: %s + %s'%n", minute, addedMinute);
+        System.out.printf(addedMinute > 0 ? "Minute: %s + %s'%n" : "Minute: %s'%n", minute, addedMinute);
     }
 
     public static void printInterrupted() throws InterruptedException {
@@ -192,6 +188,10 @@ public class TextPrinter {
         System.out.printf("%s pen shots: %s%n", leftTeam.getName(), leftShots);
         System.out.printf("%s pen shots: %s%n", rightTeam.getName(), rightShots);
         if (leftTeam.getGoals().equals(rightTeam.getGoals())) System.out.println("Not decided yet!");
+    }
+
+    public static void printStatNumbers(Team currentTeam, Float statNumber, boolean isBase) {
+        System.out.printf("RNG: %s, Chance %s: %s%n", statNumber, currentTeam.getName(), isBase ? currentTeam.getBaseChance() : currentTeam.getMinuteChance());
     }
 
 }

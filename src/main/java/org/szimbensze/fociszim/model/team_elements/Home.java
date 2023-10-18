@@ -6,7 +6,7 @@ public class Home extends Team {
         super();
         setMinuteChanceModifier(0.0022F);
         setChanceDecreaseNumber(0.0171F);
-        setShotChanceMultiplier(2.33F);
+        setShotChanceMultiplier(1.35F);
     }
 
 }

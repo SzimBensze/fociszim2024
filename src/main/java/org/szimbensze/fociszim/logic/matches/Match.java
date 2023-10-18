@@ -71,7 +71,7 @@ public abstract class Match {
 
     protected void playMatch() throws InterruptedException {
         while (currentMinute <= lastMinute) {
-            TextPrinter.printMinute(currentMinute);
+            TextPrinter.printMinute(currentMinute, 0);
             playMinute(false);
             Thread.sleep(500);
             if (currentMinute.equals(halfTime)) {
