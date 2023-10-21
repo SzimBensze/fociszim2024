@@ -21,10 +21,12 @@ public abstract class Match {
     Random random = new Random();
     Integer maxEventAmount;
     Map<Integer, FootballEvent> events;
+    boolean isStatDisplay;
 
-    public Match(Team team1, Team team2) {
+    public Match(Team team1, Team team2, boolean isStat) {
         this.teamOne = team1;
         this.teamTwo = team2;
+        this.isStatDisplay = isStat;
     }
 
     public Team getTeamOne() {
@@ -99,6 +101,8 @@ public abstract class Match {
     }
 
     private void playStoppageTime(Integer addedMinutes) throws InterruptedException {
+        if (events.size() >= 2) addedMinutes += 1;
+        if (events.size() >= 3) addedMinutes += 2;
         for (int i = 1; i <= addedMinutes; i++) {
             TextPrinter.printMinute(currentMinute, i);
             playMinute(true);
@@ -112,7 +116,8 @@ public abstract class Match {
 
     private boolean shoot(Team currentTeam, Team opponentTeam, Float chanceMultiplier) {
         currentTeam.setShots(currentTeam.getShots() + 1);
-        boolean successfulShot = random.nextFloat() < currentTeam.getMinuteChance() *
+        float randomValue = random.nextFloat();
+        boolean successfulShot = randomValue < currentTeam.getMinuteChance() *
                 (chanceMultiplier +
                         currentTeam.getAtk().floatValue() / 100F -
                         opponentTeam.getDef().floatValue() / 100F);
@@ -120,13 +125,16 @@ public abstract class Match {
             currentTeam.setGoals(currentTeam.getGoals() + 1);
             currentTeam.setMinuteChance(currentTeam.getMinuteChance() - currentTeam.getChanceDecreaseNumber());
         }
+        if (isStatDisplay) TextPrinter.printStatNumbers(currentTeam, randomValue, false);
         return successfulShot;
     }
 
     protected boolean shootPenalty(Team currentTeam, Float hitMaxValue) {
         currentTeam.setShots(currentTeam.getShots() + 1);
-        boolean successfulShot = random.nextFloat(hitMaxValue) < currentTeam.getBaseChance();
+        float randomValue = random.nextFloat(hitMaxValue);
+        boolean successfulShot = randomValue < currentTeam.getBaseChance();
         if (successfulShot) currentTeam.setGoals(currentTeam.getGoals() + 1);
+        if (isStatDisplay) TextPrinter.printStatNumbers(currentTeam, randomValue, true);
         return successfulShot;
     }
 

@@ -4,8 +4,8 @@ import org.szimbensze.fociszim.visual.TextPrinter;
 
 public class Match120 extends Match {
 
-    public Match120(Match match) {
-        super(match.getTeamOne(), match.getTeamTwo());
+    public Match120(Match prevMatch) {
+        super(prevMatch.teamOne, prevMatch.teamTwo, prevMatch.isStatDisplay);
         setFirstMinute(91);
         setLastMinute(120);
         setHalfTime(105);

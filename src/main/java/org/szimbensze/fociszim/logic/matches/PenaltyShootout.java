@@ -12,8 +12,8 @@ public class PenaltyShootout extends Match {
 
     private final Map<Team, String> penalties;
 
-    public PenaltyShootout(Match matchBefore) {
-        super(matchBefore.getTeamOne(), matchBefore.getTeamTwo());
+    public PenaltyShootout(Match prevMatch) {
+        super(prevMatch.teamOne, prevMatch.teamTwo, prevMatch.isStatDisplay);
         penalties = new HashMap<>();
         penalties.put(teamOne, "");
         penalties.put(teamTwo, "");
@@ -45,7 +45,6 @@ public class PenaltyShootout extends Match {
 
     @Override
     protected void doHalftime() throws InterruptedException {
-        TextPrinter.printPenaltyResults(teamOne, teamTwo, penalties.get(teamOne), penalties.get(teamTwo));
         Thread.sleep(2000);
     }
 
@@ -62,6 +61,7 @@ public class PenaltyShootout extends Match {
         if (penNum > penaltyAmount && penaltyAmount != -1) break;
         Thread.sleep(1000);
         }
+        TextPrinter.printPenaltyResults(teamOne, teamTwo, penalties.get(teamOne), penalties.get(teamTwo));
     }
 
 }

@@ -190,8 +190,8 @@ public class TextPrinter {
         if (leftTeam.getGoals().equals(rightTeam.getGoals())) System.out.println("Not decided yet!");
     }
 
-    public static void printStatNumbers(Team currentTeam, Float statNumber, boolean isBase) {
-        System.out.printf("RNG: %s, Chance %s: %s%n", statNumber, currentTeam.getName(), isBase ? currentTeam.getBaseChance() : currentTeam.getMinuteChance());
+    public static void printStatNumbers(Team currentTeam, Float statNumber, boolean isPenalty) {
+        System.out.printf("RNG: %s, Chance %s: %s%n", statNumber, currentTeam.getName(), isPenalty ? currentTeam.getBaseChance() : currentTeam.getMinuteChance());
     }
 
 }

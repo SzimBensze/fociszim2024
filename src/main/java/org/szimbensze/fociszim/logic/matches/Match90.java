@@ -1,15 +1,14 @@
 package org.szimbensze.fociszim.logic.matches;
 
 import org.szimbensze.fociszim.logic.ChanceCalculator;
-import org.szimbensze.fociszim.logic.ElementRandomizer;
 import org.szimbensze.fociszim.logic.TeamCreator;
 import org.szimbensze.fociszim.model.team_elements.Team;
 import org.szimbensze.fociszim.visual.TextPrinter;
 
 public class Match90 extends Match {
 
-    public Match90(Team team1, Team team2) {
-        super(team1, team2);
+    public Match90(Team team1, Team team2, boolean isStat) {
+        super(team1, team2, isStat);
         setFirstMinute(1);
         setLastMinute(90);
         setHalfTime(45);

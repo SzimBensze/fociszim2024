@@ -10,7 +10,7 @@ public class MatchBuilder {
         Team teamOne = location.equals(LocationType.HOME_STADIUM) ? new Home() : new Visitor();
         Team teamTwo = new Visitor();
 
-        Match90 baseMatch = new Match90(teamOne, teamTwo);
+        Match90 baseMatch = new Match90(teamOne, teamTwo, isStat);
         baseMatch.createTeams();
         return baseMatch;
     }
