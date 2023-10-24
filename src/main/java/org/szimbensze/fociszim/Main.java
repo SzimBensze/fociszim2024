@@ -3,8 +3,16 @@ package org.szimbensze.fociszim;
 import org.szimbensze.fociszim.logic.matches.*;
 import org.szimbensze.fociszim.visual.*;
 
+/**
+ * The main class.
+ */
 public class Main {
 
+    /**
+     * The main method with executes each launch.
+     * @param args No arguments necessary.
+     * @throws InterruptedException Throws when a simulation is interrupted by a keyboard interrupt.
+     */
     public static void main(String[] args) throws InterruptedException {
 
         System.out.println("Szim's Football Simulator 2024");
