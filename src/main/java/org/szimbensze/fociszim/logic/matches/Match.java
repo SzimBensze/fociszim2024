@@ -19,7 +19,7 @@ public abstract class Match {
     ElementRandomizer<Integer> firstHalfStoppageMinutes = new ElementRandomizer<>();
     ElementRandomizer<Integer> secHalfStoppageMinutes = new ElementRandomizer<>();
     Random random = new Random();
-    Integer maxEventAmount;
+    ElementRandomizer<Integer> maxEventAmount;
     Map<Integer, FootballEvent> events;
     boolean isStatDisplay;
 
@@ -27,14 +27,6 @@ public abstract class Match {
         this.teamOne = team1;
         this.teamTwo = team2;
         this.isStatDisplay = isStat;
-    }
-
-    public Team getTeamOne() {
-        return teamOne;
-    }
-
-    public Team getTeamTwo() {
-        return teamTwo;
     }
 
     public void setFirstMinute(Integer firstMinute) {
@@ -53,16 +45,12 @@ public abstract class Match {
         this.secHalfStoppageMinutes = secHalfStoppageMinutes;
     }
 
-    public void setMaxEventAmount(Integer maxEventAmount) {
+    public void setMaxEventAmount(ElementRandomizer<Integer> maxEventAmount) {
         this.maxEventAmount = maxEventAmount;
     }
 
-    public Map<Integer, FootballEvent> getEvents() {
-        return events;
-    }
-
     public void initiateMatch() throws InterruptedException {
-        events = EventRandomizer.createEvents(firstMinute, lastMinute, maxEventAmount, new ArrayList<>(Arrays.asList(teamOne, teamTwo)));
+        events = EventRandomizer.createEvents(firstMinute, lastMinute, maxEventAmount.next(), new ArrayList<>(Arrays.asList(teamOne, teamTwo)));
         currentMinute = firstMinute;
         try {
             playMatch();
@@ -173,10 +161,13 @@ public abstract class Match {
                             ((SingleTeamEvent) event).getAffectedTeam().getMinuteChance()
                                     + event.getType().chanceModifier * 2);
             }
+            if (isStatDisplay) TextPrinter.printStatNumbers(((SingleTeamEvent) event).getAffectedTeam(), null, false);
         } else if (event instanceof TwoTeamEvent) {
             TextPrinter.printDuoEvent((TwoTeamEvent) event);
-            for (Team affected : ((TwoTeamEvent) event).getAffectedTeams())
+            for (Team affected : ((TwoTeamEvent) event).getAffectedTeams()){
                 affected.setMinuteChance(affected.getMinuteChance() + event.getType().chanceModifier);
+                if (isStatDisplay) TextPrinter.printStatNumbers(affected, null, false);
+            }
         }
     }
 

@@ -38,7 +38,6 @@ public class PenaltyShootout extends Match {
         List<Team> teamsInOrder = headsOrTails ? Arrays.asList(teamOne, teamTwo) : Arrays.asList(teamTwo, teamOne);
         cyclePenalty(teamsInOrder, 5);
 
-        TextPrinter.printGoalStats(teamOne, teamTwo);
         doHalftime();
         if (getWinner() == null) cyclePenalty(teamsInOrder, -1);
     }
