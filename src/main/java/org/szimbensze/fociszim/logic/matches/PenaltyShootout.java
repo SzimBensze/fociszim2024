@@ -47,6 +47,12 @@ public class PenaltyShootout extends Match {
         Thread.sleep(2000);
     }
 
+    /**
+     * Cycles through the given amount of penalties in the given order.
+     * @param teamOrder The order in which teams are taking the penalties.
+     * @param penaltyAmount The amount of penalties teams take. If set to -1 teams shoot until one of them fails.
+     * @throws InterruptedException Throws at keyboard-interrupt.
+     */
     private void cyclePenalty(List<Team> teamOrder, int penaltyAmount) throws InterruptedException {
         int penNum = 1;
         while (getWinner() == null || penNum <= penaltyAmount) {

@@ -11,6 +11,10 @@ public class TeamCreator {
     UserInput userInput = new UserInput();
     Random random = new Random();
 
+    /**
+     * Calls the user input methods to add the base values and formation to the selected team.
+     * @param selectedTeam Selected team.
+     */
     public void addStats(Team selectedTeam) {
         selectedTeam.setName(userInput.inputName(selectedTeam));
         addPoints(selectedTeam, userInput.inputPoints(selectedTeam.getName(), "atk"),
@@ -26,6 +30,12 @@ public class TeamCreator {
         selectedTeam.setDef(def);
     }
 
+    /**
+     * Creates a float value of luck for the selected team.
+     * @param selectedTeam Selected team.
+     * @param baseLuck A minimum amount of luck that is always present. The higher the number the better the team's chance will be.
+     * @param luckMultiplier A constant that multiplies the random luck value. The higher the number the more significant luck will be factored.
+     */
     private void addLuck(Team selectedTeam, Float baseLuck, Float luckMultiplier) {
         selectedTeam.setLuck(baseLuck + random.nextFloat() * luckMultiplier);
     }

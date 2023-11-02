@@ -9,7 +9,7 @@ import org.szimbensze.fociszim.visual.*;
 public class Main {
 
     /**
-     * The main method with executes each launch.
+     * The main method which executes each launch.
      * @param args No arguments necessary.
      * @throws InterruptedException Throws when a simulation is interrupted by a keyboard interrupt.
      */

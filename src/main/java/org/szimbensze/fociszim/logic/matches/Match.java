@@ -10,17 +10,41 @@ import java.util.*;
 
 public abstract class Match {
 
+    /**
+     * A team object visually represented on the left side.
+     */
     Team teamOne;
+    /**
+     * A team object visually represented on the right side.
+     */
     Team teamTwo;
+    /**
+     * First minute of the game.
+     */
     Integer firstMinute;
+    /**
+     * Last minute of the game. Cycle plays through this minute as well.
+     */
     Integer lastMinute;
+    /**
+     * The minute when doHalftime() method runs.
+     */
     Integer halfTime;
+    /**
+     * Current minute which also serves as an index while cycling through.
+     */
     Integer currentMinute;
     ElementRandomizer<Integer> firstHalfStoppageMinutes = new ElementRandomizer<>();
     ElementRandomizer<Integer> secHalfStoppageMinutes = new ElementRandomizer<>();
     Random random = new Random();
     ElementRandomizer<Integer> maxEventAmount;
+    /**
+     * Collection of events that will play through the match. The key is the minute when it occurs and the value is the event itself.
+     */
     Map<Integer, FootballEvent> events;
+    /**
+     * Bool of stats display. When true the RNG display methods will run.
+     */
     boolean isStatDisplay;
 
     public Match(Team team1, Team team2, boolean isStat) {
@@ -41,14 +65,10 @@ public abstract class Match {
         this.halfTime = halfTime;
     }
 
-    public void setSecHalfStoppageMinutes(ElementRandomizer<Integer> secHalfStoppageMinutes) {
-        this.secHalfStoppageMinutes = secHalfStoppageMinutes;
-    }
-
-    public void setMaxEventAmount(ElementRandomizer<Integer> maxEventAmount) {
-        this.maxEventAmount = maxEventAmount;
-    }
-
+    /**
+     * The first method that runs when creating a new match, it initiates the process and fills up the necessary fields. (Recommended to include base method when overriding.)
+     * @throws InterruptedException Throws at keyboard-interrupt.
+     */
     public void initiateMatch() throws InterruptedException {
         events = EventRandomizer.createEvents(firstMinute, lastMinute, maxEventAmount.next(), new ArrayList<>(Arrays.asList(teamOne, teamTwo)));
         currentMinute = firstMinute;
@@ -59,6 +79,10 @@ public abstract class Match {
         }
     }
 
+    /**
+     * The core method which starts the match cycle and runs each necessary method for the gameplay.
+     * @throws InterruptedException Throws at keyboard-interrupt.
+     */
     protected void playMatch() throws InterruptedException {
         while (currentMinute <= lastMinute) {
             TextPrinter.printMinute(currentMinute, 0);
@@ -73,6 +97,11 @@ public abstract class Match {
         TextPrinter.printGoalStats(teamOne, teamTwo);
     }
 
+    /**
+     * Simulation of a single minute where each RNG and chance is compared.
+     * @param isStoppageTime If present, no events will play.
+     * @throws InterruptedException Throws at keyboard-interrupt.
+     */
     private void playMinute(boolean isStoppageTime) throws InterruptedException {
         if (checkShot(teamOne, teamOne.getShotChanceMultiplier())) {
             TextPrinter.printShot(teamOne, shoot(teamOne, teamTwo, teamOne.getShotChanceMultiplier()));
@@ -88,6 +117,11 @@ public abstract class Match {
         if (teamTwo.getMinuteChance() < 0) teamTwo.setMinuteChance(0.0001F);
     }
 
+    /**
+     * Cycle of added minutes which depend on RNG and the amount of events present in the match.
+     * @param addedMinutes The amount of stoppage time.
+     * @throws InterruptedException Throws at keyboard-interrupt.
+     */
     private void playStoppageTime(Integer addedMinutes) throws InterruptedException {
         if (events.size() >= 2) addedMinutes += 1;
         if (events.size() >= 3) addedMinutes += 2;
@@ -98,10 +132,23 @@ public abstract class Match {
         }
     }
 
+    /**
+     * Checks if the RNG is smaller than the team's overall chance.
+     * @param currentTeam Selected team.
+     * @param chanceMultiplier The team's chance multiplier (constant).
+     * @return If true, a shot will be taken.
+     */
     private boolean checkShot(Team currentTeam, Float chanceMultiplier) {
         return random.nextFloat() < currentTeam.getMinuteChance() * chanceMultiplier;
     }
 
+    /**
+     * Method that makes the selected team shoot for a goal. Goal depends on minute chance and opponent's stats as well as RNG.
+     * @param currentTeam Selected team.
+     * @param opponentTeam Opponent team.
+     * @param chanceMultiplier The team's chance multiplier (constant).
+     * @return If true, the selected team scores a goal.
+     */
     private boolean shoot(Team currentTeam, Team opponentTeam, Float chanceMultiplier) {
         currentTeam.setShots(currentTeam.getShots() + 1);
         float randomValue = random.nextFloat();
@@ -117,6 +164,12 @@ public abstract class Match {
         return successfulShot;
     }
 
+    /**
+     * Method that makes the selected team shoot a penalty. Penalty uses the team's base chance value for RNG.
+     * @param currentTeam Selected team.
+     * @param hitMaxValue Maximum value of RNG. The higher the number the harder to score a goal.
+     * @return If true, the selected team scores a penalty.
+     */
     protected boolean shootPenalty(Team currentTeam, Float hitMaxValue) {
         currentTeam.setShots(currentTeam.getShots() + 1);
         float randomValue = random.nextFloat(hitMaxValue);
@@ -126,6 +179,10 @@ public abstract class Match {
         return successfulShot;
     }
 
+    /**
+     * Method that runs when the current minute reaches halftime.
+     * @throws InterruptedException Throws at keyboard-interrupt.
+     */
     protected abstract void doHalftime() throws InterruptedException;
 
     private void checkEvent() throws InterruptedException {
@@ -171,6 +228,10 @@ public abstract class Match {
         }
     }
 
+    /**
+     * Checks which team has more goals.
+     * @return Returns the team with more goals. If none, null will be returned.
+     */
     public Team getWinner() {
         if (teamOne.getGoals() > teamTwo.getGoals()) return teamOne;
         else if (teamTwo.getGoals() > teamOne.getGoals()) return teamTwo;

@@ -46,6 +46,9 @@ public class Match90 extends Match {
         TextPrinter.printHalftime(teamOne, teamTwo, "Half-time!");
     }
 
+    /**
+     * Initiates the team creator method and creates two teams. Must run in order to play a simulation.
+     */
     public void createTeams() {
         TeamCreator teamCreator = new TeamCreator();
         ChanceCalculator calculator = new ChanceCalculator(500F);

@@ -13,6 +13,14 @@ public class EventRandomizer {
     private static final Random random = new Random();
     private static final ElementRandomizer<EventType> eventsSelection = new ElementRandomizer<>();
 
+    /**
+     * Creates a set of events using the events selection and RNG.
+     * @param minMinute The first minute an event can be played. Must not be lower than first minute.
+     * @param maxMinute The last minute an event can be played. Must not be higher than last minute.
+     * @param amount The amount of events created.
+     * @param teams The teams in the match.
+     * @return Returns a map of events. Key is the minute the event will be played and value is the event object.
+     */
     public static Map<Integer, FootballEvent> createEvents(Integer minMinute, Integer maxMinute, Integer amount, ArrayList<Team> teams) {
         createEventsList();
         Map<Integer, FootballEvent> randomEvents = new HashMap<>();
