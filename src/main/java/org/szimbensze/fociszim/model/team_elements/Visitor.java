@@ -1,5 +1,8 @@
 package org.szimbensze.fociszim.model.team_elements;
 
+/**
+ * Visitor team has slightly worse chances than a Home team.
+ */
 public class Visitor extends Team {
 
     public Visitor() {

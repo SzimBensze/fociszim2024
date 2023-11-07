@@ -1,5 +1,8 @@
 package org.szimbensze.fociszim.model.team_elements;
 
+/**
+ * Home team has a slight advantage over a Visitor team.
+ */
 public class Home extends Team {
 
     public Home() {

@@ -3,6 +3,9 @@ package org.szimbensze.fociszim.model.team_elements;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Holds all the available formations as well as able to select a default one.
+ */
 public class Formations {
     private static final Map<String, Formation> formations = new HashMap<>();
 
@@ -33,17 +36,25 @@ public class Formations {
         formations.put("4-2-2-1-1", new Formation("4-2-2-1-1", 10, -2, 5));
     }
 
+    /**
+     * @param formationName The formation code for a formation. Must be following the format in order to get a Formation object.
+     * @return Returns a Formation object from the map or a default one using the getDefaultFormation(String) method.
+     */
     public static Formation getFormation(String formationName) {
         return formations.getOrDefault(formationName, getDefaultFormation(formationName));
     }
 
+    /**
+     * @param rawFormation The formation code for a formation. Must be following the format in order to get a valid Formation object.
+     * @return Returns a Formation called "default formation" which has preset points. Returns a Formation with zero values if fails to find one.
+     */
     private static Formation getDefaultFormation(String rawFormation) {
         int numLines = rawFormation.split("-").length;
         return switch (numLines) {
             case 3 -> new Formation("X-X-X", 4, 5, 4); // Default for "X-X-X"
             case 4 -> new Formation("X-X-X-X", 3, 4, 6); // Default for "X-X-X-X"
             case 5 -> new Formation("X-X-X-X-X", 4, 7, 2); // Default for "X-X-X-X-X"
-            default -> new Formation("?-?-?", 0, 0, 0); // Default for any other case (e.g., invalid formation, no modifications)
+            default -> new Formation("?-?-?", 0, 0, 0); // Invalid cases
         };
     }
 }

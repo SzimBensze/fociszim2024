@@ -37,7 +37,7 @@ public abstract class Match {
     ElementRandomizer<Integer> firstHalfStoppageMinutes = new ElementRandomizer<>();
     ElementRandomizer<Integer> secHalfStoppageMinutes = new ElementRandomizer<>();
     Random random = new Random();
-    ElementRandomizer<Integer> maxEventAmount;
+    ElementRandomizer<Integer> maxEventAmount = new ElementRandomizer<>();
     /**
      * Collection of events that will play through the match. The key is the minute when it occurs and the value is the event itself.
      */

@@ -18,8 +18,14 @@ public class UserInput {
         return sc.nextLine();
     }
 
+    /**
+     * Gets a user input as base points between values of 1 and 99.
+     * @param teamName Selected team's name.
+     * @param pointType The base point type. "atk" = attack points, "mid" = midfield points, "def" = defense points
+     * @return Returns the input value as an integer (reference type).
+     */
     public Integer inputPoints(String teamName, String pointType) {
-        Integer points = 0;
+        int points = 0;
         do {
             switch (pointType) {
                 case "atk" -> System.out.printf("%s attack points (1-99): ", teamName);
@@ -38,6 +44,11 @@ public class UserInput {
         return points;
     }
 
+    /**
+     * Uses a regex to validate an input value as a formation code, such as "4-2-3-1".
+     * @param teamName Selected team's name.
+     * @return Returns a validated string that can be used to determine a Formation object.
+     */
     public String inputFormation(String teamName) {
         System.out.printf("Formation for %s:%n", teamName);
         while (true) {
@@ -50,6 +61,11 @@ public class UserInput {
         }
     }
 
+    /**
+     * Answers a yes/no question with user input.
+     * @param question The question displayed on the console.
+     * @return Returns true if the answer is positive ("y" or "yes") and false ("n" or "no") if negative.
+     */
     public static boolean inputYesNo(String question) {
         System.out.println(question);
         while (true) {

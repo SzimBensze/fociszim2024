@@ -13,6 +13,10 @@ import java.util.stream.IntStream;
 
 public class TextPrinter {
 
+    /**
+     * Prints a team's name, base stats and formation.
+     * @param team Chosen team.
+     */
     public static void printTeam(Team team) {
         System.out.println("\nTeam input stats:");
         if (team.getClass().equals(Home.class)) System.out.printf("Home team: %s%n", team.getName());
@@ -55,6 +59,12 @@ public class TextPrinter {
         else System.out.printf("%s missed shot%n", team.getName());
     }
 
+    /**
+     * Prints an event's happenings on the console by its type.
+     * @param event An event that only includes one team.
+     * @throws InterruptedException Throws at keyboard-interrupt.
+     * @throws IncorrectEventTypeException Throws if no actual event type is chosen.
+     */
     public static void printSingleEvent(SingleTeamEvent event) throws InterruptedException, IncorrectEventTypeException {
         if (event.getType().equals(EventType.GOAL_DENIED)) {
             printShot(event.getAffectedTeam(), true);
@@ -125,6 +135,12 @@ public class TextPrinter {
         Thread.sleep(1000);
     }
 
+    /**
+     * Prints an event's happenings on the console by its type.
+     * @param event An event that always includes both teams.
+     * @throws InterruptedException Throws at keyboard-interrupt.
+     * @throws IncorrectEventTypeException Throws if no actual event type is chosen.
+     */
     public static void printDuoEvent(TwoTeamEvent event) throws InterruptedException, IncorrectEventTypeException {
         switch (event.getType()) {
             case OBSTRUCTION -> {
@@ -163,6 +179,11 @@ public class TextPrinter {
         else System.out.printf("%s won the match! Congratulations!\n", winner.getName());
     }
 
+    /**
+     * Prints both teams' goals, shots and accuracy percentages on the console.
+     * @param leftTeam The team visually represented on the left side.
+     * @param rightTeam The team visually represented on the right side.
+     */
     public static void printGoalStats(Team leftTeam, Team rightTeam) {
         System.out.println("-----");
         System.out.println("Match statistics:");
@@ -174,6 +195,12 @@ public class TextPrinter {
                 String.format("%.2f", rightTeam.getAccuracy()));
     }
 
+    /**
+     * Prints a flipped coin's value as well as what side the teams chose.
+     * @param leftTeam The team visually represented on the left side.
+     * @param rightTeam The team visually represented on the right side.
+     * @param coinValue The coin's value as a boolean.
+     */
     public static void printCoin(Team leftTeam, Team rightTeam, boolean coinValue) {
         System.out.printf("Coin flip: %s - HEADS, %s - TAILS%nThe coin landed on %s%n", leftTeam.getName(), rightTeam.getName(), coinValue ? "HEADS" : "TAILS");
     }
@@ -190,6 +217,12 @@ public class TextPrinter {
         if (leftTeam.getGoals().equals(rightTeam.getGoals())) System.out.println("Not decided yet!");
     }
 
+    /**
+     * Prints the float values which are used during the match.
+     * @param currentTeam Selected team.
+     * @param statNumber The float value included in the method.
+     * @param isPenalty During a penalty kick different numbers are used. If this value is true the method shows different values.
+     */
     public static void printStatNumbers(Team currentTeam, Float statNumber, boolean isPenalty) {
         System.out.printf("RNG: %s, Chance %s: %s%n", statNumber, currentTeam.getName(), isPenalty ? currentTeam.getBaseChance() : currentTeam.getMinuteChance());
     }

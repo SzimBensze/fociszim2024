@@ -1,5 +1,8 @@
 package org.szimbensze.fociszim.model.team_elements;
 
+/**
+ * Football team class that includes all necessary data to play a game.
+ */
 public abstract class Team {
 
     String name;
@@ -125,6 +128,10 @@ public abstract class Team {
         this.goals = goals;
     }
 
+    /**
+     * Gets a team's accuracy by dividing its goals by the number of shots taken.
+     * @return Percentage of a team's accuracy as a float value.
+     */
     public Float getAccuracy() {
         if (shots.equals(0)) return 0F;
         else return goals.floatValue() / shots.floatValue() * 100F;
