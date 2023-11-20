@@ -123,6 +123,7 @@ public abstract class Match {
      * @throws InterruptedException Throws at keyboard-interrupt.
      */
     private void playStoppageTime(Integer addedMinutes) throws InterruptedException {
+        if (events.size() >= 1) addedMinutes += 1;
         if (events.size() >= 2) addedMinutes += 1;
         if (events.size() >= 3) addedMinutes += 2;
         for (int i = 1; i <= addedMinutes; i++) {

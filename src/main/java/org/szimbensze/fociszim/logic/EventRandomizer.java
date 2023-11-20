@@ -24,7 +24,7 @@ public class EventRandomizer {
     public static Map<Integer, FootballEvent> createEvents(Integer minMinute, Integer maxMinute, Integer amount, ArrayList<Team> teams) {
         createEventsList();
         Map<Integer, FootballEvent> randomEvents = new HashMap<>();
-        for (int i = 0; i < random.nextInt(amount); i++) {
+        for (int i = 0; i < amount; i++) {
             EventType chosenEvent = eventsSelection.next();
             if (chosenEvent.affectBothTeams)
                 randomEvents.put(random.nextInt(minMinute, maxMinute),
