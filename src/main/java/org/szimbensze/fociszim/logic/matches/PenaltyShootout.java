@@ -36,10 +36,10 @@ public class PenaltyShootout extends Match {
         Thread.sleep(2000);
 
         List<Team> teamsInOrder = headsOrTails ? Arrays.asList(teamOne, teamTwo) : Arrays.asList(teamTwo, teamOne);
-        cyclePenalty(teamsInOrder, 5);
+        cyclePenalty(teamsInOrder, 5, 1);
 
         doHalftime();
-        if (getWinner() == null) cyclePenalty(teamsInOrder, -1);
+        if (getWinner() == null) cyclePenalty(teamsInOrder, -1, 6);
     }
 
     @Override
@@ -51,19 +51,19 @@ public class PenaltyShootout extends Match {
      * Cycles through the given amount of penalties in the given order.
      * @param teamOrder The order in which teams are taking the penalties.
      * @param penaltyAmount The amount of penalties teams take. If set to -1 teams shoot until one of them fails.
+     * @param currentPenaltyNumber The number of the first penalty. Must be 1 in order to shoot all penalties if penaltyAmount is not -1.
      * @throws InterruptedException Throws at keyboard-interrupt.
      */
-    private void cyclePenalty(List<Team> teamOrder, int penaltyAmount) throws InterruptedException {
-        int penNum = 1;
-        while (getWinner() == null || penNum <= penaltyAmount) {
+    private void cyclePenalty(List<Team> teamOrder, int penaltyAmount, int currentPenaltyNumber) throws InterruptedException {
+        while (getWinner() == null || currentPenaltyNumber <= penaltyAmount) {
             for (Team penaltyTaker : teamOrder) {
                 boolean shot = shootPenalty(penaltyTaker, 900F);
                 penalties.replace(penaltyTaker, penalties.get(penaltyTaker) + (shot ? "✓" : "✗"));
-                TextPrinter.printPenaltyShootout(penaltyTaker, penNum, shot);
+                TextPrinter.printPenaltyShootout(penaltyTaker, currentPenaltyNumber, shot);
                 Thread.sleep(500);
             }
-        penNum++;
-        if (penNum > penaltyAmount && penaltyAmount != -1) break;
+        currentPenaltyNumber++;
+        if (currentPenaltyNumber > penaltyAmount && penaltyAmount != -1) break;
         Thread.sleep(1000);
         }
         TextPrinter.printPenaltyResults(teamOne, teamTwo, penalties.get(teamOne), penalties.get(teamTwo));

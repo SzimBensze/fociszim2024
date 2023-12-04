@@ -191,7 +191,8 @@ public abstract class Match {
             try {
                 playEvent(events.get(currentMinute));
             } catch (IncorrectEventTypeException e) {
-                //TODO event incorrect type message
+                TextPrinter.printError("unknown event");
+                Thread.sleep(500);
             }
         }
     }

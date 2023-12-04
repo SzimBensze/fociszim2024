@@ -45,7 +45,7 @@ public class TextPrinter {
     }
 
     public static void printMinute(Integer minute, Integer addedMinute) {
-        System.out.printf(addedMinute > 0 ? "Minute: %s + %s'%n" : "Minute: %s'%n", minute, addedMinute);
+        System.out.printf(addedMinute > 0 ? "Min.: %s + %s'%n" : "Min.: %s'%n", minute, addedMinute);
     }
 
     public static void printInterrupted() throws InterruptedException {
@@ -225,6 +225,10 @@ public class TextPrinter {
      */
     public static void printStatNumbers(Team currentTeam, Float statNumber, boolean isPenalty) {
         System.out.printf("RNG: %s, Chance %s: %s%n", statNumber, currentTeam.getName(), isPenalty ? currentTeam.getBaseChance() : currentTeam.getMinuteChance());
+    }
+
+    public static void printError(String message) {
+        System.out.printf("Something happened during the match! (%s) The match will carry on if possible.", message);
     }
 
 }
