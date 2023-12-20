@@ -210,7 +210,6 @@ public abstract class Match {
                     Team givenTeam = ((SingleTeamEvent) event).getAffectedTeam();
                     givenTeam.setShots(givenTeam.getShots() + 1);
                     givenTeam.setGoals(givenTeam.getGoals() + 1);
-                    TextPrinter.printShot(givenTeam, true);
                 default :
                     if (((SingleTeamEvent) event).getVar())
                         ((SingleTeamEvent) event).getAffectedTeam().setMinuteChance(

@@ -66,7 +66,7 @@ public class TextPrinter {
      * @throws IncorrectEventTypeException Throws if no actual event type is chosen.
      */
     public static void printSingleEvent(SingleTeamEvent event) throws InterruptedException, IncorrectEventTypeException {
-        if (event.getType().equals(EventType.GOAL_DENIED)) {
+        if (event.getType().equals(EventType.GOAL_DENIED) || event.getType().equals(EventType.VAR_GOAL)) {
             printShot(event.getAffectedTeam(), true);
             Thread.sleep(1000);
         }
@@ -102,6 +102,8 @@ public class TextPrinter {
                     Thread.sleep(2000);
                     printDots(5);
                 }
+                Thread.sleep(1000);
+                System.out.printf("%s goal confirmed!%n", event.getAffectedTeam().getName());
             }
             case GOAL_DENIED -> {
                 if (!event.getVar()) {

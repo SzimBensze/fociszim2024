@@ -9,12 +9,12 @@ public enum EventType {
      * Penalty event grants the chosen team a penalty kick. It doesn't modify any chance, but the attempt counts as a shot regardless of goal.
      */
     PENALTY(0F, false, true),
-    YELLOW_CARD(-0.002F, false, true),
+    YELLOW_CARD(-0.002F, false, false),
     RED_CARD(-0.022F, false, true),
     /**
      * This event grants the chosen team a goal verified by VAR. Because of this, the minute chance of the chosen team is slightly decreased.
      */
-    VAR_GOAL(-0.002F, false, true),
+    VAR_GOAL(-0.005F, false, true),
     /**
      * This event creates a fake goal for the chosen team that is immediately denied afterwards. This decreases the minute chance of the team.
      */
