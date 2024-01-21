@@ -158,6 +158,7 @@ public class TextPrinter {
                 System.out.println("The security guards are being deployed");
                 printDots(3);
             }
+            case OWN_GOAL -> System.out.println("It's an own goal!");
             default -> throw new IncorrectEventTypeException("Incorrect event type!");
         }
         Thread.sleep(1000);
@@ -229,6 +230,10 @@ public class TextPrinter {
      */
     public static void printStatNumbers(Team currentTeam, Float statNumber, boolean isPenalty) {
         System.out.printf("RNG: %s, Chance %s: %s%n", statNumber, currentTeam.getName(), isPenalty ? currentTeam.getBaseChance() : currentTeam.getMinuteChance());
+    }
+
+    public static void printOwnGoal(Team givenTeam, Team sufferedTeam) {
+        System.out.printf("Goal granted for %s! (Own goal shot by: %s)%n", givenTeam.getName(), sufferedTeam.getName());
     }
 
     public static void printError(String message) {

@@ -198,33 +198,46 @@ public abstract class Match {
     }
 
     private void playEvent(FootballEvent event) throws InterruptedException, IncorrectEventTypeException {
-        if (event instanceof SingleTeamEvent) {
-            TextPrinter.printSingleEvent((SingleTeamEvent) event);
+        if (event instanceof SingleTeamEvent currentEvent) {
+            TextPrinter.printSingleEvent(currentEvent);
             switch (event.getType()) {
                 case PENALTY :
-                    Team penaltyTaker = ((SingleTeamEvent) event).getAffectedTeam();
+                    Team penaltyTaker = currentEvent.getAffectedTeam();
                     TextPrinter.printShot(penaltyTaker, shootPenalty(penaltyTaker, 1000F));
                     Thread.sleep(500);
                     break;
                 case VAR_GOAL :
-                    Team givenTeam = ((SingleTeamEvent) event).getAffectedTeam();
+                    Team givenTeam = currentEvent.getAffectedTeam();
                     givenTeam.setShots(givenTeam.getShots() + 1);
                     givenTeam.setGoals(givenTeam.getGoals() + 1);
                 default :
-                    if (((SingleTeamEvent) event).getVar())
-                        ((SingleTeamEvent) event).getAffectedTeam().setMinuteChance(
-                            ((SingleTeamEvent) event).getAffectedTeam().getMinuteChance()
-                                    + event.getType().chanceModifier);
-                    else ((SingleTeamEvent) event).getAffectedTeam().setMinuteChance(
-                            ((SingleTeamEvent) event).getAffectedTeam().getMinuteChance()
-                                    + event.getType().chanceModifier * 2);
+                    if (currentEvent.getVar())
+                        currentEvent.getAffectedTeam().setMinuteChance(
+                                currentEvent.getAffectedTeam().getMinuteChance()
+                                        + currentEvent.getType().chanceModifier);
+                    else
+                        currentEvent.getAffectedTeam().setMinuteChance(
+                                currentEvent.getAffectedTeam().getMinuteChance()
+                                        + currentEvent.getType().chanceModifier * 2);
             }
             if (isStatDisplay) TextPrinter.printStatNumbers(((SingleTeamEvent) event).getAffectedTeam(), null, false);
-        } else if (event instanceof TwoTeamEvent) {
-            TextPrinter.printDuoEvent((TwoTeamEvent) event);
-            for (Team affected : ((TwoTeamEvent) event).getAffectedTeams()){
-                affected.setMinuteChance(affected.getMinuteChance() + event.getType().chanceModifier);
-                if (isStatDisplay) TextPrinter.printStatNumbers(affected, null, false);
+        } else if (event instanceof TwoTeamEvent currentEvent) {
+            TextPrinter.printDuoEvent(currentEvent);
+            switch (event.getType()) {
+                case OWN_GOAL :
+                    //needs rework ASAP (preferably lucky team removed from event list)
+                    Collections.shuffle(currentEvent.getAffectedTeams());
+                    Team givenTeam = currentEvent.getAffectedTeams().get(0);
+                    givenTeam.setGoals(givenTeam.getGoals() + 1);
+                    givenTeam.setMinuteChance(givenTeam.getMinuteChance() - currentEvent.getType().chanceModifier * 2);
+                    Team unluckyTeam = currentEvent.getAffectedTeams().get(1);
+                    TextPrinter.printOwnGoal(givenTeam, unluckyTeam);
+                    Thread.sleep(500);
+                default :
+                    for (Team affected : (currentEvent.getAffectedTeams())){
+                        affected.setMinuteChance(affected.getMinuteChance() + event.getType().chanceModifier);
+                        if (isStatDisplay) TextPrinter.printStatNumbers(affected, null, false);
+                }
             }
         }
     }

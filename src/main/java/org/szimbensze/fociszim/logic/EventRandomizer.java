@@ -40,15 +40,15 @@ public class EventRandomizer {
 
     private static void createEventsList() {
         eventsSelection.add(16, EventType.PENALTY);
-        eventsSelection.add(22, EventType.YELLOW_CARD);
+        eventsSelection.add(21, EventType.YELLOW_CARD);
         eventsSelection.add(12, EventType.RED_CARD);
         eventsSelection.add(5, EventType.VAR_GOAL);
         eventsSelection.add(10, EventType.GOAL_DENIED);
         eventsSelection.add(6, EventType.INJURY);
         eventsSelection.add(8, EventType.OBSTRUCTION);
-        eventsSelection.add(8, EventType.INVADER);
-        eventsSelection.add(13, EventType.NOT_FOUL);
-        //eventsSelection.add(1000, EventType.OWN_GOAL);
+        eventsSelection.add(7, EventType.INVADER);
+        eventsSelection.add(12, EventType.NOT_FOUL);
+        eventsSelection.add(3, EventType.OWN_GOAL);
     }
 
 }

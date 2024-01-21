@@ -19,11 +19,14 @@ public enum EventType {
      * This event creates a fake goal for the chosen team that is immediately denied afterwards. This decreases the minute chance of the team.
      */
     GOAL_DENIED(-0.001F, false, true),
-    INJURY(-0.01F, false, false),
+    INJURY(-0.02F, false, false),
     OBSTRUCTION(-0.001F, true, false),
     INVADER(0.002F, true, false),
     NOT_FOUL(0.002F, false, true),
-    OWN_GOAL(0.001F, true, false);
+    /**
+     * This event grants a team a goal and decreases the chance for the other one (who caused the own goal).
+     */
+    OWN_GOAL(-0.005F, true, false);
 
     public final Float chanceModifier;
     public final boolean affectBothTeams;
