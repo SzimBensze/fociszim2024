@@ -37,6 +37,7 @@ public class Formations {
     }
 
     /**
+     * Searches for a football formation that grants the team additional points.
      * @param formationName The formation code for a formation. Must be following the format in order to get a Formation object.
      * @return Returns a Formation object from the map or a default one using the getDefaultFormation(String) method.
      */

@@ -66,7 +66,7 @@ public class PenaltyShootout extends Match {
         if (currentPenaltyNumber > penaltyAmount && penaltyAmount != -1) break;
         Thread.sleep(1000);
         }
-        TextPrinter.printPenaltyResults(teamOne, teamTwo, penalties.get(teamOne), penalties.get(teamTwo));
+        TextPrinter.printGoalStats(teamOne, teamTwo, penalties.get(teamOne), penalties.get(teamTwo));
     }
 
 }
