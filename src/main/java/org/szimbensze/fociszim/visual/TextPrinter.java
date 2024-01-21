@@ -11,13 +11,13 @@ import org.szimbensze.fociszim.model.team_elements.Visitor;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-public interface TextPrinter {
+public class TextPrinter {
 
     /**
      * Prints a team's name, base stats and formation.
      * @param team Chosen team.
      */
-    static void printTeam(Team team) {
+    public static void printTeam(Team team) {
         System.out.println("\nTeam input stats:");
         if (team.getClass().equals(Home.class)) System.out.printf("Home team: %s%n", team.getName());
         else if (team.getClass().equals(Visitor.class)) System.out.printf("Visitor team: %s%n", team.getName());
@@ -27,13 +27,13 @@ public interface TextPrinter {
         else System.out.printf("%s formation: %s%n", team.getName(), team.getFormation().formationName());
     }
 
-    static void printDivider() {
+    public static void printDivider() {
         System.out.println();
         System.out.println("-----");
         System.out.println();
     }
 
-    static void printInitiation() throws InterruptedException {
+    public static void printInitiation() throws InterruptedException {
         System.out.println("Simulation initiated!");
         Thread.sleep(1300);
         System.out.println("Preparing the field...");
@@ -44,17 +44,17 @@ public interface TextPrinter {
         Thread.sleep(700);
     }
 
-    static void printMinute(Integer minute, Integer addedMinute) {
+    public static void printMinute(Integer minute, Integer addedMinute) {
         System.out.printf(addedMinute > 0 ? "Min.: %s + %s'%n" : "Min.: %s'%n", minute, addedMinute);
     }
 
-    static void printInterrupted() throws InterruptedException {
+    public static void printInterrupted() throws InterruptedException {
         System.out.println("The match was cancelled by console.");
         Thread.sleep(2000);
         System.exit(0);
     }
 
-    static void printShot(Team team, boolean shot) {
+    public static void printShot(Team team, boolean shot) {
         if (shot) System.out.printf("%s GOOOAAAL!!!%n", team.getName());
         else System.out.printf("%s missed shot%n", team.getName());
         //TODO more miss options (saved, post, miss);
@@ -66,7 +66,7 @@ public interface TextPrinter {
      * @throws InterruptedException Throws at keyboard-interrupt.
      * @throws IncorrectEventTypeException Throws if no actual event type is chosen.
      */
-    static void printSingleEvent(SingleTeamEvent event) throws InterruptedException, IncorrectEventTypeException {
+    public static void printSingleEvent(SingleTeamEvent event) throws InterruptedException, IncorrectEventTypeException {
         if (event.getType().equals(EventType.GOAL_DENIED) || event.getType().equals(EventType.VAR_GOAL)) {
             printShot(event.getAffectedTeam(), true);
             Thread.sleep(1000);
@@ -144,7 +144,7 @@ public interface TextPrinter {
      * @throws InterruptedException Throws at keyboard-interrupt.
      * @throws IncorrectEventTypeException Throws if no actual event type is chosen.
      */
-    static void printDuoEvent(TwoTeamEvent event) throws InterruptedException, IncorrectEventTypeException {
+    public static void printDuoEvent(TwoTeamEvent event) throws InterruptedException, IncorrectEventTypeException {
         switch (event.getType()) {
             case OBSTRUCTION -> {
                 System.out.println("An object fell onto the field!");
@@ -171,13 +171,13 @@ public interface TextPrinter {
         }
     }
 
-    static void printHalftime(Team teamOne, Team teamTwo, String halftimeMessage) throws InterruptedException {
+    public static void printHalftime(Team teamOne, Team teamTwo, String halftimeMessage) throws InterruptedException {
         System.out.println(halftimeMessage);
         printGoalStats(teamOne, teamTwo);
         Thread.sleep(2000);
     }
 
-    static void printWinner(Team winner) {
+    public static void printWinner(Team winner) {
         if (winner == null) System.out.println("The match is a tie! Congratulations to both teams.");
         else System.out.printf("%s won the match! Congratulations!\n", winner.getName());
     }
@@ -187,7 +187,7 @@ public interface TextPrinter {
      * @param leftTeam The team visually represented on the left side.
      * @param rightTeam The team visually represented on the right side.
      */
-    static void printGoalStats(Team leftTeam, Team rightTeam) {
+    public static void printGoalStats(Team leftTeam, Team rightTeam) {
         System.out.println("-----");
         System.out.println("Match statistics:");
         System.out.printf("%s - %s Goals: %s - %s Shots: %s - %s Accuracy: %s%% - %s%%%n",
@@ -198,7 +198,7 @@ public interface TextPrinter {
                 String.format("%.2f", rightTeam.getAccuracy()));
     }
 
-    static void printGoalStats(Team leftTeam, Team rightTeam, String leftShots, String rightShots) {
+    public static void printGoalStats(Team leftTeam, Team rightTeam, String leftShots, String rightShots) {
         System.out.println("-----");
         System.out.println("Penalty statistics:");
         System.out.printf("%s pen shots: %s%n", leftTeam.getName(), leftShots);
@@ -212,11 +212,11 @@ public interface TextPrinter {
      * @param rightTeam The team visually represented on the right side.
      * @param coinValue The coin's value as a boolean.
      */
-    static void printCoin(Team leftTeam, Team rightTeam, boolean coinValue) {
+    public static void printCoin(Team leftTeam, Team rightTeam, boolean coinValue) {
         System.out.printf("Coin flip: %s - HEADS, %s - TAILS%nThe coin landed on %s%n", leftTeam.getName(), rightTeam.getName(), coinValue ? "HEADS" : "TAILS");
     }
 
-    static void printPenaltyShootout(Team currentTeam, int number, boolean shot) {
+    public static void printPenaltyShootout(Team currentTeam, int number, boolean shot) {
         System.out.printf("%s No.%s shot:%n", currentTeam.getName(), number);
         printShot(currentTeam, shot);
     }
@@ -227,12 +227,12 @@ public interface TextPrinter {
      * @param statNumber The float value included in the method.
      * @param isPenalty During a penalty kick different numbers are used. If this value is true the method shows these values.
      */
-    static void printStatNumbers(Team currentTeam, Float statNumber, boolean isPenalty) {
+    public static void printStatNumbers(Team currentTeam, Float statNumber, boolean isPenalty) {
         System.out.printf("RNG: %s, Chance %s: %s%n", statNumber, currentTeam.getName(), isPenalty ? currentTeam.getBaseChance() : currentTeam.getMinuteChance());
     }
 
-    static void printError(String message) {
-        System.out.printf("Something happened during the match! (%s) The match will carry on if possible.", message);
+    public static void printError(String message) {
+        System.out.printf("Something happened during the match! (%s) The match will carry on if possible.%n", message);
     }
 
 }

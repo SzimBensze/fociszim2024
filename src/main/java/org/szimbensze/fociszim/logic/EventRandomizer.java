@@ -48,6 +48,7 @@ public class EventRandomizer {
         eventsSelection.add(8, EventType.OBSTRUCTION);
         eventsSelection.add(8, EventType.INVADER);
         eventsSelection.add(13, EventType.NOT_FOUL);
+        //eventsSelection.add(1000, EventType.OWN_GOAL);
     }
 
 }
