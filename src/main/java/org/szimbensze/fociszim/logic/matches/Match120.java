@@ -18,10 +18,10 @@ public class Match120 extends Match {
         secHalfStoppageMinutes.add(29, 2);
         secHalfStoppageMinutes.add(27, 3);
         secHalfStoppageMinutes.add(6, 4);
-        maxEventAmount.add(40, 0);
+        maxEventAmount.add(50, 0);
         maxEventAmount.add(30, 1);
-        maxEventAmount.add(20, 2);
-        maxEventAmount.add(10, 3);
+        maxEventAmount.add(15, 2);
+        maxEventAmount.add(5, 3);
     }
 
     @Override
