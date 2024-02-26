@@ -41,8 +41,8 @@ public class Match90 extends Match {
 
     @Override
     protected void doHalftime() throws InterruptedException {
-        if (teamOne.getShots() < 5 && teamOne.getGoals() == 0) teamOne.setMinuteChance(teamOne.getMinuteChance() + teamOne.getMinuteChanceModifier() * 5F);
-        if (teamTwo.getShots() < 5 && teamTwo.getGoals() == 0) teamTwo.setMinuteChance(teamTwo.getMinuteChance() + teamTwo.getMinuteChanceModifier() * 5F);
+        if (teamOne.getShots() < 5 && teamOne.getGoals() == 0) teamOne.setMinuteChance(teamOne.getMinuteChance() + teamOne.getMinuteChanceModifier() * 7F);
+        if (teamTwo.getShots() < 5 && teamTwo.getGoals() == 0) teamTwo.setMinuteChance(teamTwo.getMinuteChance() + teamTwo.getMinuteChanceModifier() * 7F);
         TextPrinter.printHalftime(teamOne, teamTwo, "Half-time!");
     }
 

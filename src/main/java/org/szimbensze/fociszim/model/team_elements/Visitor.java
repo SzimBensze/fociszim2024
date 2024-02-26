@@ -7,9 +7,9 @@ public class Visitor extends Team {
 
     public Visitor() {
         super();
-        setMinuteChanceModifier(0.0021F);
-        setChanceDecreaseNumber(0.0191F);
-        setShotChanceMultiplier(1.31F);
+        setMinuteChanceModifier(0.0022F);
+        setChanceDecreaseNumber(0.0184F);
+        setShotChanceMultiplier(1.43F);
     }
 
 }

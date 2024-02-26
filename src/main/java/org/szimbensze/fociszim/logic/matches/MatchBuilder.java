@@ -9,7 +9,7 @@ public class MatchBuilder {
     /**
      * Creates a match with a set of two teams. This must be run first in order to create further match objects.
      * @param location Location type enum. Check class file for more details.
-     * @param isStat If true, stats and RNGs will be displayed.
+     * @param isStat If true, stats and RNG values will be displayed.
      * @return Returns a 90-minutes-long match with two newly created teams.
      */
     public static Match90 createBaseMatch(LocationType location, boolean isStat) {
